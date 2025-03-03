@@ -1,88 +1,127 @@
-import React, { useEffect, useState } from "react";
 import Slider from "react-slick";
 import Link from "next/link";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+
+const SampleNextArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style,display: "flex",  right: "-46px", zIndex: "10", top: "30%" }}
+      onClick={onClick}
+    >
+      <FontAwesomeIcon icon={faArrowRight} size="lg" color="#000" />
+    </div>
+  );
+};
+
+const SamplePrevArrow = (props) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+       style={{ ...style, display: "flex", left: "10px", zIndex: "10", top: "30%" }}
+      onClick={onClick}
+    >
+      <FontAwesomeIcon icon={faArrowLeft} size="lg" color="#000" />
+    </div>
+  );
+};
+
+
+
+
 
 const ListingSliderOne = {
   dots: true,
   infinite: true,
   speed: 500,
-  slidesToShow: 3,
+  slidesToShow: 4, // Default for large screens
   slidesToScroll: 1,
-  autoplay: true,
-  autoplaySpeed: 3000,
+  arrows: true,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />,
+  responsive: [
+    {
+      breakpoint: 1024, // Tablets
+      settings: {
+        slidesToShow: 3,
+      },
+    },
+    {
+      breakpoint: 768, // Small tablets & large phones
+      settings: {
+        slidesToShow: 2,
+      },
+    },
+    {
+      breakpoint: 480, // Mobile devices
+      settings: {
+        slidesToShow: 1, // Show 1 item on mobile
+      },
+    },
+  ],
 };
 
+
+const listingData = [
+  {
+    id: 1,
+    imgSrc: "assets/images/category/cat-8.jpg",
+    title: "Shopping",
+    listings: 15,
+  },
+  {
+    id: 2,
+    imgSrc: "assets/images/category/cat-7.jpg",
+    title: "Shopping",
+    listings: 15,
+  },
+  {
+    id: 3,
+    imgSrc: "assets/images/category/cat-6.jpg",
+    title: "Shopping",
+    listings: 15,
+  },
+];
+
 const DestinationCategory = () => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) return null; // Prevents errors before component loads
-
   return (
-    <section className="listing-grid-area pb-110">
+    <section className="listing-grid-area">
       <div className="container">
+        <div className="row justify-content-center">
+          <div className="col-lg-8"></div>
+        </div>
         <Slider {...ListingSliderOne} className="listing-slider-one wow fadeInDown">
-          {[
-            {
-              img: "assets/images/category/cat-5.jpg",
-              title: "Pizza Recipe",
-              icon: "flaticon-chef",
-              category: "Restaurant",
-              listings: 15,
-            },
-            {
-              img: "assets/images/listing/listing-grid-8.jpg",
-              title: "Gym Ground",
-              icon: "flaticon-dumbbell",
-              category: "Fitness",
-              listings: 12,
-            },
-            {
-              img: "assets/images/listing/listing-grid-9.jpg",
-              title: "City Palace",
-              icon: "flaticon-government",
-              category: "Historic Site",
-              listings: 8,
-            },
-            {
-              img: "assets/images/listing/listing-grid-1.jpg",
-              title: "Sushi Place",
-              icon: "flaticon-chef",
-              category: "Restaurant",
-              listings: 20,
-            },
-          ].map((item, index) => (
-            <div key={index} className="col-lg-3 col-md-6 col-sm-12">
-              <div className="category-item category-item-two mb-25 wow fadeInUp" data-wow-delay=".25s">
-                <div className="category-img">
-                  <img src={item.img} alt="Category Image" />
-                  <div className="category-overlay">
-                    <div className="category-content">
-                      <Link href="/index-2">
-                        <i className="ti-link" />
-                      </Link>
-                    </div>
+          {listingData.map((item) => (
+            <div key={item.id} className="category-item category-item-two">
+              <div className="category-img">
+                <img src={item.imgSrc} alt="Listing Image" />
+                <div className="category-overlay">
+                  <div className="category-content">
+                    <Link href="/index-2">
+                      <i className="ti-link" />
+                    </Link>
                   </div>
                 </div>
-                <div className="info">
-                  <div className="icon">
-                    <i className={item.icon} />
-                  </div>
-                  <h3 className="title">
-                    <a href="#">{item.category}</a>
-                  </h3>
-                  <span className="listing">{item.listings} Listing</span>
+              </div>
+              <div className="info">
+                <div className="icon">
+                  <i className="flaticon-shopping" />
                 </div>
+                <h3 className="title">
+                  <a href="#">{item.title}</a>
+                </h3>
+                <span className="listing">{item.listings} Listing</span>
               </div>
             </div>
           ))}
         </Slider>
       </div>
+
+
+
     </section>
   );
 };
