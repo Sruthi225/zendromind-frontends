@@ -1,14 +1,16 @@
+import React, { useState, useEffect } from "react";
 import Slider from "react-slick";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import Image from "next/image";
 
 const SampleNextArrow = (props) => {
   const { className, style, onClick } = props;
   return (
     <div
       className={className}
-      style={{ ...style,display: "flex",  right: "-46px", zIndex: "10", top: "30%" }}
+      style={{ ...style, display: "flex", right: "-46px", zIndex: "10", top: "30%" }}
       onClick={onClick}
     >
       <FontAwesomeIcon icon={faArrowRight} size="lg" color="#000" />
@@ -21,7 +23,7 @@ const SamplePrevArrow = (props) => {
   return (
     <div
       className={className}
-       style={{ ...style, display: "flex", left: "10px", zIndex: "10", top: "30%" }}
+      style={{ ...style, display: "flex", left: "10px", zIndex: "10", top: "30%" }}
       onClick={onClick}
     >
       <FontAwesomeIcon icon={faArrowLeft} size="lg" color="#000" />
@@ -29,64 +31,46 @@ const SamplePrevArrow = (props) => {
   );
 };
 
-
-
-
-
 const ListingSliderOne = {
   dots: true,
   infinite: true,
   speed: 500,
-  slidesToShow: 4, // Default for large screens
+  slidesToShow: 4,
   slidesToScroll: 1,
   arrows: true,
   nextArrow: <SampleNextArrow />,
   prevArrow: <SamplePrevArrow />,
   responsive: [
-    {
-      breakpoint: 1024, // Tablets
-      settings: {
-        slidesToShow: 3,
-      },
-    },
-    {
-      breakpoint: 768, // Small tablets & large phones
-      settings: {
-        slidesToShow: 2,
-      },
-    },
-    {
-      breakpoint: 480, // Mobile devices
-      settings: {
-        slidesToShow: 1, // Show 1 item on mobile
-      },
-    },
+    { breakpoint: 1024, settings: { slidesToShow: 3 } },
+    { breakpoint: 768, settings: { slidesToShow: 2 } },
+    { breakpoint: 480, settings: { slidesToShow: 1 } },
   ],
 };
 
-
-const listingData = [
-  {
-    id: 1,
-    imgSrc: "assets/images/category/cat-8.jpg",
-    title: "Shopping",
-    listings: 15,
-  },
-  {
-    id: 2,
-    imgSrc: "assets/images/category/cat-7.jpg",
-    title: "Shopping",
-    listings: 15,
-  },
-  {
-    id: 3,
-    imgSrc: "assets/images/category/cat-6.jpg",
-    title: "Shopping",
-    listings: 15,
-  },
-];
-
 const DestinationCategory = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch(
+          "http://13.203.104.113:3000/api/user/get/city_details/findintrivandrum"
+        );
+        const data = await response.json();
+
+        if (data.success_status && data.info.length > 0) {
+          setCategories(data.info[0].Category || []);
+        } else {
+          console.error("Invalid API response format");
+        }
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+
+    fetchCategories();
+  }, []);
+
   return (
     <section className="listing-grid-area">
       <div className="container">
@@ -94,34 +78,47 @@ const DestinationCategory = () => {
           <div className="col-lg-8"></div>
         </div>
         <Slider {...ListingSliderOne} className="listing-slider-one wow fadeInDown">
-          {listingData.map((item) => (
-            <div key={item.id} className="category-item category-item-two">
-              <div className="category-img">
-                <img src={item.imgSrc} alt="Listing Image" />
-                <div className="category-overlay">
-                  <div className="category-content">
-                    <Link href="/index-2">
-                      <i className="ti-link" />
-                    </Link>
+          {categories.length > 0 ? (
+            categories.map((category) => {
+              const imageUrl = category.V_DigitalFile || "/images/category/default.jpg"; // Use default if null
+              const iconUrl = category.V_LogFile || "/images/icons/default-icon.png"; // Use default icon if null
+
+              return (
+                <div key={category.N_T_M_Category_ID} className="category-item category-item-two">
+                  <div className="category-img">
+                    <Image
+                      src={imageUrl}
+                      alt={category.V_CategoryName}
+                      width={300}
+                      height={200}
+                      style={{ objectFit: "cover", borderRadius: "10px" }}
+                      unoptimized // Required for external URLs
+                    />
+                    <div className="category-overlay">
+                      <div className="category-content">
+                        <Link href="/index-2">
+                          <i className="ti-link" />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="info">
+                    <div className="icon">
+                      <Image src={iconUrl} alt="icon" width={30} height={30} unoptimized />
+                    </div>
+                    <h3 className="title">
+                      <a href="#">{category.V_CategoryName}</a>
+                    </h3>
+                    <span className="listing">{category.Listing} Listings</span>
                   </div>
                 </div>
-              </div>
-              <div className="info">
-                <div className="icon">
-                  <i className="flaticon-shopping" />
-                </div>
-                <h3 className="title">
-                  <a href="#">{item.title}</a>
-                </h3>
-                <span className="listing">{item.listings} Listing</span>
-              </div>
-            </div>
-          ))}
+              );
+            })
+          ) : (
+            <p>Loading categories...</p>
+          )}
         </Slider>
       </div>
-
-
-
     </section>
   );
 };

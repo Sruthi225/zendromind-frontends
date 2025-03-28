@@ -1,39 +1,44 @@
-
 import Slider from 'react-slick';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 
 // Sample data
 const listingData = [
   {
     id: 1,
-    imgSrc: '/assets/images/listing/listing-grid-7.jpg',
-    title: 'Pizza Recipe',
-    categoryIcon: 'flaticon-chef',
+    imgSrc: "/assets/images/listing/listing-grid-7.jpg",
+    title: "Pizza Recipe",
+    categoryName: "Mall",
     reviews: 2,
-    location: 'California, USA',
-    phone: '+98 (265) 3652 - 05',
-    status: 'Open',
+    location: "California, USA",
+    phone: "+98 (265) 3652 - 05",
+    whatsapp: "9898989898",
+    website: "https://example.com",
+    mapLink: "https://www.google.com/maps?q=California,USA",
+    status: "Open",
     featured: true,
   },
   {
     id: 2,
-    imgSrc: '/assets/images/listing/listing-grid-8.jpg',
-    title: 'Gym Ground',
-    categoryIcon: 'flaticon-dumbbell',
+    imgSrc: "/assets/images/listing/listing-grid-8.jpg",
+    title: "Gym Ground",
+    categoryName: "Restaurant",
     reviews: 2,
-    location: 'California, USA',
-    phone: '+98 (265) 3652 - 05',
-    status: 'Close',
+    location: "California, USA",
+    phone: "+98 (265) 3652 - 05",
+    whatsapp: "9898989899",
+    website: "https://example.com",
+    mapLink: "https://www.google.com/maps?q=California,USA",
+    status: "Close",
     featured: false,
   },
   {
     id: 3,
     imgSrc: '/assets/images/listing/listing-grid-9.jpg',
     title: 'City Palace',
-    categoryIcon: 'flaticon-government',
+    categoryName: 'flaticon-government',
     reviews: 2,
     location: 'California, USA',
     phone: '+98 (265) 3652 - 05',
@@ -44,7 +49,7 @@ const listingData = [
     id: 4,
     imgSrc: '/assets/images/listing/listing-grid-1.jpg',
     title: 'Pizza Recipe',
-    categoryIcon: 'flaticon-chef',
+    categoryName: 'flaticon-chef',
     reviews: 2,
     location: 'California, USA',
     phone: '+98 (265) 3652 - 05',
@@ -62,7 +67,7 @@ const listingData = [
 const SampleNextArrow = (props) => {
   const { className, style, onClick } = props;
   return (
-    <div className={className} style={{ ...style,display: "flex", right: '-46px', zIndex: 10 }} onClick={onClick}>
+    <div className={className} style={{ ...style, display: "flex", right: '-46px', zIndex: 10 }} onClick={onClick}>
       <FontAwesomeIcon icon={faArrowRight} size="lg" color="#000" />
     </div>
   );
@@ -71,7 +76,7 @@ const SampleNextArrow = (props) => {
 const SamplePrevArrow = (props) => {
   const { className, style, onClick } = props;
   return (
-    <div className={className} style={{ ...style,display: "flex", left: '10px', zIndex: 10 }} onClick={onClick}>
+    <div className={className} style={{ ...style, display: "flex", left: '10px', zIndex: 10 }} onClick={onClick}>
       <FontAwesomeIcon icon={faArrowLeft} size="lg" color="#000" />
     </div>
   );
@@ -85,8 +90,10 @@ const sliderSettings = {
   slidesToShow: 3,
   slidesToScroll: 1,
   arrows: true,
-  nextArrow: <SampleNextArrow />,
-  prevArrow: <SamplePrevArrow />,
+  nextArrow:
+    <SampleNextArrow />,
+  prevArrow:
+    <SamplePrevArrow />,
   responsive: [
     {
       breakpoint: 1024,
@@ -120,17 +127,14 @@ const sliderSettings = {
 
 const LatestDestination = () => {
   return (
-    <section className="listing-grid-area  ">
-      <container className="container">
-        
+    <section className="listing-grid-area">
+      <div className="container">
         <Slider {...sliderSettings} className="listing-slider-one wow fadeInDown">
           {listingData.map((item) => (
-            <listingItem key={item.id} className="listing-item listing-grid-item-two">
+            <div key={item.id} className="listing-item listing-grid-item-two">
               <div className="listing-thumbnail">
                 <img src={item.imgSrc} alt="Listing Image" />
-                <a href="#" className="cat-btn">
-                  <i className={item.categoryIcon}></i>
-                </a>
+                <div className="cat-name">{item.categoryName}</div>
                 {item.featured && <span className="featured-btn">Featured</span>}
                 <ul className="ratings">
                   {Array.from({ length: 5 }).map((_, index) => (
@@ -146,37 +150,45 @@ const LatestDestination = () => {
                 </ul>
               </div>
               <div className="listing-content">
-                <h3 className="title">
-                  <Link href="/listing-details-1">{item.title}</Link>
-                </h3>
-                <p>Popular destination in {item.location}</p>
-                <span className="phone-meta">
-                  <i className="ti-tablet"></i>
-                  <a href={`tel:${item.phone}`}>{item.phone}</a>
-                  <span className={`status ${item.status.toLowerCase() === 'open' ? 'st-open' : 'st-close'}`}>
-                    {item.status}
+                <div className="li-padding">
+                  <h3 className="title">
+                    <Link href="/listing-details-1">{item.title}</Link>
+                  </h3>
+                  <p>
+                    <i className="ti-location-pin"></i> {item.location}
+                  </p>
+                  <span className="phone-meta">
+                    <i className="ti-tablet"></i>
+                    <a href={`tel:${item.phone}`}>{item.phone}</a>
                   </span>
-                </span>
-                <div className="listing-meta">
-                  <ul>
-                    <li>
-                      <span>
-                        <i className="ti-location-pin"></i> {item.location}
-                      </span>
-                    </li>
-                    <li>
-                      <span>
-                        <i className="ti-heart"></i>
-                        <a href="#">Save</a>
-                      </span>
-                    </li>
-                  </ul>
+
+                  {/* Contact & Links */}
+                  <div className="listing-meta list-meta2 d-flex justify-content-between align-items-center">
+                    <a href={item.viewMoreLink}>
+                      <div className="view-more">View More</div>
+                    </a>
+                    <div className="icons d-flex align-items-center">
+                      {/* WhatsApp */}
+                      <a className="li-icon" href={`https://wa.me/${item.whatsapp}`} target="_blank"
+                        rel="noopener noreferrer">
+                        <FontAwesomeIcon icon={faWhatsapp} />
+                      </a>
+                      {/* Website */}
+                      <a className="li-icon" href={item.website} target="_blank" rel="noopener noreferrer">
+                        <i className="ti-world"></i>
+                      </a>
+                      {/* Google Maps Location */}
+                      <a className="li-icon" href={item.mapLink} target="_blank" rel="noopener noreferrer">
+                        <i className="ti-location-pin"></i>
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </listingItem>
+            </div>
           ))}
         </Slider>
-      </container>
+      </div>
     </section>
   );
 };
