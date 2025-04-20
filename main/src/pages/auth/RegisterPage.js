@@ -1,33 +1,80 @@
-import React, { useContext } from "react";
+
+import React, { useState, useContext } from "react";
 import { TranslatorContext } from "../../context/Translator";
 import { ButtonComponent, AnchorComponent } from "../../components/elements";
 import IconFieldComponent from "../../components/fields/IconFieldComponent";
 import LogoComponent from "../../components/LogoComponent";
+import config from "../../components/commonservices";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterPage() {
 
     const { t } = useContext(TranslatorContext);
+
+    const navigate = useNavigate();
+
+    const [formData, setFormData] = useState({
+        Name: "",
+        UserName: "",
+        Password: "",
+        ConfirmPassword: "",
+        UserType: ""
+    });
+
+    const [passwordError, setPasswordError] = useState(false);
+
+    // // 👉 STEP 2: Handle input changes
+    // const handleChange = (field, value) => {
+    //     setFormData(prev => ({ ...prev, [field]: value }));
+    // };
+
+    const handleChange = (field, value) => {
+        setFormData(prev => {
+            const updated = { ...prev, [field]: value };
+    
+            // Live check for password match when ConfirmPassword changes
+            if (field === "ConfirmPassword" || field === "Password") {
+                setPasswordError(
+                    updated.Password && updated.ConfirmPassword && updated.Password !== updated.ConfirmPassword
+                );
+            }
+    
+            return updated;
+        });
+    };
+
+    // 👉 STEP 3: Submit form
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch(`${config.bmrServerURL}/api/admin/user/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({V_Name: formData.Name, 
+                                      V_UserName: formData.UserName, 
+                                      V_Password: formData.Password,
+                                      V_UserType: formData.UserType
+                                     }) // send more fields as needed
+            });
+
+            const data = await response.json();
+            if (data?.status_code === 200) {
+                navigate("/user-list"); // 👈 Redirect to dashboard
+            } else {
+                alert(data.response || "Unable to Register the User.");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+        }
+    };
+
     
     return (
-        <div className="mc-register">
-            <div className="mc-register-banner">
-                <img 
-                    className="mc-register-banner-pattern" 
-                    src="images/pattern.webp"
-                    alt="pattern"
-                />
-                <div className="mc-register-banner-content">
-                    <h2 className="mc-register-banner-title">Best ux/ui fashion ecommerce dashboard & admin panel</h2>
-                    <p className="mc-register-banner-descrip">Elit Iusto dolore libero recusandae dolor dolores explicabo ullam cum facilis aperiam   alias odio quam excepturi molestiae omnis inventore. Repudiandae officia placeat amet consectetur dicta dolorem quo</p>
-                    <AnchorComponent 
-                        to="/ecommerce"
-                        icon="home" 
-                        text={t('go_to_home')} 
-                        className="mc-btn primary" 
-                    />
-                </div>
-            </div>
-            <form className="mc-register-form">
+        <div className="mc-register"  style = {{display: 'flex', justifyContent: 'center', alignitem: 'center', marginTop: "100px"}} onSubmit={handleSubmit} >
+            <form className="mc-register-form" >
                 <LogoComponent 
                     src="images/logo.webp"
                     alt="logo" 
@@ -40,12 +87,17 @@ export default function RegisterPage() {
                     type="text"
                     classes="h-sm"
                     placeholder={t('enter_your_name')}
+                    value={formData.Name}
+                    onChange={(e) => handleChange("Name", e.target.value)}
                 />
                 <IconFieldComponent 
                     icon="email"
                     type="email"
                     classes="h-sm"
                     placeholder={t('enter_your_email')}
+                    passwordVisible={true}
+                    value={formData.UserName}
+                    onChange={(e) => handleChange("UserName", e.target.value)}
                 />
                 <IconFieldComponent 
                     icon="lock"
@@ -53,20 +105,37 @@ export default function RegisterPage() {
                     classes="h-sm"
                     placeholder={t('enter_your_password')}
                     passwordVisible={true}
+                    value={formData.Password}
+                    onChange={(e) => handleChange("Password", e.target.value)}
                 />
                 <IconFieldComponent 
-                    icon="verified_user"
-                    type="password"
-                    classes="h-sm"
-                    placeholder={t('confirm_your_password')}
-                    passwordVisible={true}
+                     icon="verified_user"
+                     type="password"
+                     classes={`h-sm ${passwordError ? "border-red" : ""}`}
+                     placeholder={t('confirm_your_password')}
+                     passwordVisible={true}
+                     value={formData.ConfirmPassword}
+                     onChange={(e) => handleChange("ConfirmPassword", e.target.value)}
                 />
-                <div className="mc-auth-checkbox">
+                {passwordError && (
+                    <p style={{ color: "red", fontSize: "12px" , marginTop: "-20px"}}>
+                        Passwords do not match.
+                    </p>
+                )}
+                <IconFieldComponent 
+                    icon="verified_user"
+                    classes="w-100 h-sm"
+                    option={["Super Admin", "Admin", "Member", "Client", "Manager", "Vendor"]}
+                    passwordVisible={true}
+                    value={formData.UserType}
+                    onChange={(e) => handleChange("UserType", e.target.value)}
+                />
+                {/* <div className="mc-auth-checkbox">
                     <input type="checkbox" id="checkbox" />
                     <label htmlFor="checkbox">I agree to the all Terms & Condiotions</label>
-                </div>
-                <ButtonComponent className="mc-auth-btn h-sm" type="button">{t('sign_up')}</ButtonComponent>
-                <div className="mc-auth-divide"><span>{t('or')}</span></div>
+                </div> */}
+                <ButtonComponent className="mc-auth-btn h-sm" type="submit">{t('sign_up')}</ButtonComponent>
+                {/* <div className="mc-auth-divide"><span>{t('or')}</span></div>
                 <div className="mc-auth-connect">
                     <AnchorComponent to="#" className="twitter h-sm">
                         <i className="icofont-twitter"></i>
@@ -76,11 +145,11 @@ export default function RegisterPage() {
                         <i className="icofont-facebook"></i>
                         <span>Continue with Facebook</span>
                     </AnchorComponent>
-                </div>
+                </div>*/}
                 <div className="mc-register-navigate">
                     <span>Already have an account?</span>
                     <AnchorComponent to="/login">{t('login')}</AnchorComponent>
-                </div>
+                </div> 
             </form>
         </div>
     )

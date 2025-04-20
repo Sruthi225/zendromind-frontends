@@ -1,4 +1,5 @@
-export { default as ProductsTableComponent } from "./ProductsTableComponent";
+export { default as CityCategoryLinkComponent } from "./CityCategoryLinkComponent";
+export { default as CitiesTableComponent } from "./CitiesTableComponent";
 export { default as ClientsTableComponent } from "./ClientsTableComponent";
 export { default as TrafficsTableComponent } from "./TrafficsTableComponent";
 export { default as InvoiceTableComponent } from "./InvoiceTableComponent";

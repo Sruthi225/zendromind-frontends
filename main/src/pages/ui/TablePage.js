@@ -4,7 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import { BreadcrumbComponent } from "../../components";
 import { CardHeaderComponent } from "../../components/cards";
 import { AnchorComponent } from "../../components/elements";
-import { ProductsTableComponent, UsersTableComponent, PagesTableComponent, TrafficsTableComponent } from "../../components/tables";
+import { CitiesTableComponent, UsersTableComponent, PagesTableComponent, TrafficsTableComponent } from "../../components/tables";
 import PageLayout from "../../layouts/PageLayout";
 import data from "../../assets/data/ui/tables.json";
 
@@ -28,7 +28,7 @@ export default function TablePage() {
                             title={t(data?.products.title)} 
                             dotsMenu={ data?.products.dotsMenu } 
                         />
-                        <ProductsTableComponent 
+                        <CitiesTableComponent 
                             thead={ data?.products.thead } 
                             tbody={ data?.products.tbody } 
                         />

@@ -364,6 +364,10 @@
     width: 1px;
 }
 
+.border-red{
+    border: 1px solid red !important;
+}
+
 .sr-only-focusable:active,
 .sr-only-focusable:focus {
     clip: auto;

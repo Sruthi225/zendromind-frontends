@@ -178,8 +178,8 @@
     @include flex-dimension(center, flex-start, 0px 12px);
 
     input {
-        width: 15px;
-        height: 15px;
+        width: 20px;
+        height: 20px;
         flex-shrink: 0;
         outline: 2px solid var(--lightBorder);
     }
@@ -192,6 +192,28 @@
     }
 }
 
+.mc-checkbox {
+    margin-top: 50px;
+    align-items: center;
+    
+}
+.mc-check-wrap{
+    display: 'inline-flex';
+    flex-Direction: 'row';
+    gap: '20px';
+    flex-Wrap: 'wrap';
+    align-Items: 'center';
+    margin-Top: '20px';
+}
+.check{
+    display: inline-flex;
+    gap: 5px;
+    flex-Wrap: 'wrap'
+}
+.Button {
+    margin: 20px auto 0 auto; 
+    align-items: center;
+}
 .mc-table-profile {
     @include flex-dimension(center, flex-start, 0px 5px);
 
@@ -365,6 +387,7 @@
         background-color: var(--lightGray);
     }
 }
+
 
 .light_mode {
     .mc-table-action {

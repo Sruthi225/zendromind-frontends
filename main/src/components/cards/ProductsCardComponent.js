@@ -3,7 +3,7 @@ import { TranslatorContext } from "../../context/Translator";
 import { LabelFieldComponent } from "../fields";
 import { Row, Col, Dropdown } from "react-bootstrap";
 import PaginationComponent from "../PaginationComponent";
-import ProductsTableComponent from "../tables/ProductsTableComponent";
+import CitiesTableComponent from "../tables/CitiesTableComponent";
 import products from "../../assets/data/products.json";
 
 
@@ -61,7 +61,7 @@ export default function ProductsCardComponent() {
                     />
                 </Col>
             </Row>
-            <ProductsTableComponent 
+            <CitiesTableComponent 
                 thead={products.thead} 
                 tbody={products.tbody} 
             />

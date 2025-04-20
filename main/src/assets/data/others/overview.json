@@ -43,8 +43,8 @@
         },
         { 
             "image": "images/pages/product-list.webp", 
-            "path": "/product-list", 
-            "title": "product list" 
+            "path": "/city-list", 
+            "title": "city list" 
         },
         { 
             "image": "images/pages/product-view.webp", 

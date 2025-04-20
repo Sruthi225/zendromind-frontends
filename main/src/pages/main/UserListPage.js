@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { TranslatorContext } from "../../context/Translator";
 import { Link } from "react-router-dom";
 import { Row, Col, Dropdown } from "react-bootstrap";
@@ -7,12 +7,38 @@ import { PaginationComponent } from "../../components";
 import LabelFieldComponent from "../../components/fields/LabelFieldComponent";
 import UsersTableComponent from "../../components/tables/UsersTableComponent";
 import PageLayout from "../../layouts/PageLayout";
-import floats from "../../assets/data/floats.json"
-import users from "../../assets/data/users.json"
+import config from "../../components/commonservices";
+
+
 
 export default function UserListPage() {
 
     const { t } = useContext(TranslatorContext);
+    const [userData, setUserData] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [selectedRole, setSelectedRole] = useState("");
+
+
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+
+    const fetchUsers = async () => {
+        try {
+            const response = await fetch(`${config.bmrServerURL}/api/admin/get/user_list`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            const data = await response.json();
+            setUserData(data.info);
+        } catch (error) {
+            console.error("Error fetching users:", error);
+        } 
+    };
+
+   
 
     return (
         <PageLayout>
@@ -29,16 +55,24 @@ export default function UserListPage() {
                         </div>
                     </div>
                 </Col>
-                {floats.map((float, index) => (
-                    <Col xl={4} key={ index }>
+                {/* {floats.map((float, index) => ( */}
+                    <Col xl={6} /*key={ index }*/>
                         <FloatCardComponent 
-                            variant={ float.variant }
-                            digit={ float.digit }
-                            title={ float.title }
-                            icon={ float.icon }
+                            variant= "lg green" 
+                            digit={  userData.filter(user => user.B_Active === 1).length }
+                            title="Active Users" 
+                            icon="check_circle"
                         />
                     </Col>
-                ))}
+                    <Col xl={6} /*key={ index }*/>
+                        <FloatCardComponent 
+                            variant= "lg red" 
+                            digit={  userData.filter(user => user.B_Active === 0).length }
+                            title="InActive Users" 
+                            icon="remove_circle"
+                        />
+                    </Col>
+                {/* ))} */}
                 <Col xl={12}>
                     <div className="mc-card">
                         <div className="mc-card-header">
@@ -47,52 +81,65 @@ export default function UserListPage() {
                                 <Dropdown.Toggle bsPrefix="mc-dropdown-toggle">
                                     <i className='material-icons'>more_horiz</i>
                                 </Dropdown.Toggle>
-                                <Dropdown.Menu align="end" className="mc-dropdown-paper">
+                                {/* <Dropdown.Menu align="end" className="mc-dropdown-paper">
                                     <button type='button' className='mc-dropdown-menu'><i className='material-icons'>edit</i><span>{t('edit')}</span></button>
                                     <button type='button' className='mc-dropdown-menu'><i className='material-icons'>delete</i><span>{t('delete')}</span></button>
-                                    <button type='button' className='mc-dropdown-menu'><i className='material-icons'>download</i><span>{t('download')}</span></button>
-                                </Dropdown.Menu>
+                                </Dropdown.Menu> */}
                             </Dropdown>
                         </div>
                         <Row xs={1} sm={2} xl={4}>
                             <Col>
                                 <LabelFieldComponent
-                                    label={t('show_by')}
-                                    option={["12 row", "24 row", "36 row"]}
-                                    labelDir="label-col"
-                                    fieldSize="mb-4 w-100 h-md"
-                                />
-                            </Col>
-                            <Col>
-                                <LabelFieldComponent
                                     label={t('role_by')}
-                                    option={["admin", "member", "client", "manager", "vendor"]}
+                                    option={["Select Role","Super Admin","Admin", "Member", "Client", "Manager", "Vendor"]}
                                     labelDir="label-col"
                                     fieldSize="mb-4 w-100 h-md"
-                                />
-                            </Col>
-                            <Col>
-                                <LabelFieldComponent
-                                    label={t('status_by')}
-                                    option={["approved", "pending", "blocked"]}
-                                    labelDir="label-col"
-                                    fieldSize="mb-4 w-100 h-md"
+                                    onChange={(e) => setSelectedRole(e.target.value)}
                                 />
                             </Col>
                             <Col>
                                 <LabelFieldComponent
                                     type="search"
                                     label={t('search_by')}
-                                    placeholder={t('id') + ' / ' + t('name') + ' / ' + t('email') + ' / ' + t('number')}
+                                    placeholder={ t('name') + ' / ' + t('username') }
                                     labelDir="label-col"
                                     fieldSize="mb-4 w-100 h-md"
+                                    onChange={(e) => setSearchTerm(e.target.value)}
                                 />
                             </Col>
                         </Row>
                         <UsersTableComponent 
-                            thead={ users.thead }
-                            tbody={ users.tbody }
+                            thead={["Name", "UserName", "Role", "Status", "Date", "Actions"]}
+                            tbody={userData
+                                .filter(user => {
+                                    const name = user.V_Name?.toLowerCase() || "";
+                                    const username = user.V_UserName?.toLowerCase() || "";
+
+                                    const matchesRole = selectedRole && selectedRole !== "Select Role" ? user.V_UserType === selectedRole : true;
+
+                                    const matchesSearch = searchTerm
+                                        ? (
+                                            name.includes(searchTerm.toLowerCase()) ||
+                                            username.includes(searchTerm.toLowerCase())
+                                        )
+                                        : true;
+                            
+                                    return matchesRole && matchesSearch;
+                                })
+                                .map(user => ({
+                                    N_T_M_User_ID: user.N_T_M_User_ID,
+                                    name: user.V_Name,
+                                    username: user.V_UserName,
+                                    role: user.V_UserType,
+                                    status: user.B_Active === 1 ? "Active" : "InActive",
+                                    date: new Date(user.D_InsertedOn).toLocaleDateString(),
+                                    action: { edit: "edit",  view: "visibility" }
+                                }))
+                            }
+                            fetchUsers={fetchUsers}
+
                         />
+
                         <PaginationComponent />
                     </div>
                 </Col>

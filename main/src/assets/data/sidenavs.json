@@ -32,12 +32,28 @@
             },
             { 
                 "icon": "pix", 
-                "text": "products",
+                "text": "city",
                 "badge": { "text": "new", "variant": "purple square" },
                 "submenus": [
-                    { "path": "/product-list", "text": "product_list" },
+                    { "path": "/city-list", "text": "city_list" },
                     { "path": "/product-view", "text": "product_view" },
                     { "path": "/product-upload", "text": "product_upload" }
+                ]
+            },
+            { 
+                "icon": "pix", 
+                "text": "category",
+                "badge": { "text": "new", "variant": "purple square" },
+                "submenus": [
+                    { "path": "/category-list", "text": "category_list" }
+                ]
+            },
+            { 
+                "icon": "pix", 
+                "text": "location",
+                "badge": { "text": "new", "variant": "purple square" },
+                "submenus": [
+                    { "path": "/location-list", "text": "location_list" }
                 ]
             },
             { 

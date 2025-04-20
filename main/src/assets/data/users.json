@@ -1,5 +1,5 @@
 {
-    "thead": ["name", "role", "email", "password", "phone", "status", "created", "action"],
+    "thead": ["name", "role", "email", "action"],
     "tbody": [
         {
             "role": { "icon": "person", "text": "member" },
