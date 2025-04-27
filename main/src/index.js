@@ -19,12 +19,17 @@ import { LoginPage, RegisterPage, ForgotPasswordPage } from "./pages/auth";
 import {  DocumentationPage, ChangeLogPage, ErrorPage } from "./pages/others";
 import { AvatarPage, AlertPage, ButtonPage, ChartPage, TablePage, FieldPage, HeadingPage, ColorPage } from "./pages/ui";
 import { EcommercePage, AnalyticsPage, CRMPage, UserListPage, UserProfilePage, MyAccountPage, 
-        CityListPage,  LocationListPage, ProductViewPage, ProductUploadPage,  InvoiceListPage, InvoiceDetailsPage, OrderListPage, MessagePage, 
+        CityListPage,  LocationListPage,  ItemsUploadPage, ItemListPage,  ProductViewPage, ProductUploadPage,  InvoiceListPage, InvoiceDetailsPage,MessagePage, 
         NotificationPage, BlankPage, SettingsPage } from "./pages/main";
 import { UserProvider } from './context/localstorage';
 import CategoryListPage from "./pages/main/CategoryListPage";
 import CityCategoryLinkComponent from "./components/tables/CityCategoryLinkComponent";
 import CategoryLocationLinkComponent from "./components/tables/CategoryLocationLinkComponent";
+import ItemTableComponent from "./components/tables/ItemTableComponent";
+import ItemDetailUploadComponent from "./components/tables/ItemDetailUploadComponent";
+import ItemDetailUpdateComponent from "./components/tables/ItemDetailUpdateComponent";
+import ItemsUpdatePage from "./components/tables/ItemsUpdatePage";
+import ItemDetailsListPage from "./pages/main/ItemDetailsListPage";
 
 
         
@@ -45,9 +50,11 @@ const router = createBrowserRouter([
     { path: "/product-upload", element: <ProductUploadPage /> },
     { path: "/category-list", element: <CategoryListPage /> },
     { path: "/location-list", element: <LocationListPage /> },
+    { path: "/items-upload", element: <ItemsUploadPage /> },
+    { path: "/item-list", element: <ItemListPage /> },
+    { path: "/item-details-list", element: <ItemDetailsListPage /> },
     { path: "/invoice-list", element: <InvoiceListPage /> },
     { path: "/invoice-details", element: <InvoiceDetailsPage /> },
-    { path: "/order-list", element: <OrderListPage /> },
     { path: "/message", element: <MessagePage /> },
     { path: "/notification", element: <NotificationPage /> },
     { path: "/blank-page", element: <BlankPage /> },
@@ -55,6 +62,10 @@ const router = createBrowserRouter([
 
     {path: "/city-category-link", element: <CityCategoryLinkComponent/>},
     {path: "/category-location-link", element: <CategoryLocationLinkComponent/>},
+    {path: "/ItemTableComponent", element: <ItemTableComponent/>},
+    { path: "/items-update", element: <ItemsUpdatePage /> },
+    { path: "/item-details-upload", element: <ItemDetailUploadComponent /> },
+    { path: "/item-details-update", element: <ItemDetailUpdateComponent /> },
 
     // UI PAGES
     { path: "/avatars", element: <AvatarPage /> },                               

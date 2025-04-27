@@ -1,6 +1,5 @@
 {
     "quick_finding": "quick finding",
-    "orders": "orders",
     "mark_all_as_read": "mark all as read",
     "mark_all_as_unread": "mark all as unread",
     "delete_all_order": "delete all order",
@@ -44,9 +43,8 @@
     "product_upload": "product upload",
     "category_list": "category list",
     "location_list": "location list",
-    "invoices": "invoices",
-    "invoice_list": "invoice list",
-    "invoice_details": "invoice details",
+    "item_list": "item list",
+    "items_upload": "items upload",
     "settings": "settings",
     "blank_page": "blank page",
     "ui_pages": "ui pages",

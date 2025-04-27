@@ -6,9 +6,7 @@
                 "icon": "dashboard", 
                 "text": "dashboard",
                 "submenus": [
-                    { "path": "/ecommerce", "text": "ecommerce" },
-                    { "path": "/analytics", "text": "analytics" },
-                    { "path": "/crm", "text": "crm" }
+                    { "path": "/ecommerce", "text": "ecommerce" }
                 ]
             },
             { 
@@ -23,7 +21,6 @@
             { 
                 "icon": "account_circle", 
                 "text": "users", 
-                "badge": { "text": "hot", "variant": "red square" },
                 "submenus": [
                     { "path": "/user-list", "text": "user_list" },
                     { "path": "/user-profile", "text": "user_profile" },
@@ -33,17 +30,14 @@
             { 
                 "icon": "pix", 
                 "text": "city",
-                "badge": { "text": "new", "variant": "purple square" },
                 "submenus": [
-                    { "path": "/city-list", "text": "city_list" },
-                    { "path": "/product-view", "text": "product_view" },
-                    { "path": "/product-upload", "text": "product_upload" }
+                    { "path": "/city-list", "text": "city_list" }
+                    
                 ]
             },
             { 
                 "icon": "pix", 
                 "text": "category",
-                "badge": { "text": "new", "variant": "purple square" },
                 "submenus": [
                     { "path": "/category-list", "text": "category_list" }
                 ]
@@ -51,7 +45,6 @@
             { 
                 "icon": "pix", 
                 "text": "location",
-                "badge": { "text": "new", "variant": "purple square" },
                 "submenus": [
                     { "path": "/location-list", "text": "location_list" }
                 ]
@@ -59,39 +52,11 @@
             { 
                 "path": "#",
                 "icon": "article", 
-                "text": "invoices",
+                "text": "items",
                 "submenus": [
-                    { "path": "/invoice-list", "text": "invoice_list" },
-                    { "path": "/invoice-details", "text": "invoice_details" }
+                    { "path": "/items-upload", "text": "items_upload" },
+                    { "path": "/item-list", "text": "item_list" }
                 ]
-            },
-            { 
-                "path": "/order-list",
-                "icon": "shopping_cart", 
-                "text": "orders",
-                "badge": { "count": 5, "variant": "primary round" }
-            },
-            { 
-                "path": "/message",
-                "icon": "email", 
-                "text": "messages",
-                "badge": { "count": 3, "variant": "primary round" }
-            },
-            { 
-                "path": "/notification",
-                "icon": "notifications", 
-                "text": "notifications",
-                "badge": { "count": 9, "variant": "primary round" }
-            },
-            { 
-                "path": "/settings",
-                "icon": "settings", 
-                "text": "settings" 
-            },
-            { 
-                "path": "/blank-page",
-                "icon": "class", 
-                "text": "blank_page" 
             }
         ]
     },

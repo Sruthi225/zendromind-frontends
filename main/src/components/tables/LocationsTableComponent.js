@@ -6,28 +6,50 @@ import config from "../../components/commonservices";
 
 export default function LocationsTableComponent({ thead, tbody, fetchLocations }) {
 
-    const { t } = useContext(TranslatorContext)
+    const { t } = useContext(TranslatorContext);
 
     const [alertModal, setAlertModal] = useState(false);
     const [data, setData] = useState([]);
     const [LocationData, setLocationData] = React.useState("");
+    const [cityData, setcityData] = useState([]);
     const [editModal, setEditModal] = React.useState(false);
     const [blockModal, setBlockModal] = React.useState(false);
 
+    useEffect(() => {
+        fetchCities();
+    }, []);
+
+
     useEffect(()=> { setData(tbody) }, [tbody]);
+
+    const fetchCities = async () => {
+        try {
+            const response = await fetch(`${config.bmrServerURL}/api/admin/get/city_list`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            const data = await response.json();
+            setcityData(data.info);
+        } catch (error) {
+            console.error("Error fetching cities:", error);
+        } 
+    };
+
 
     const handleSaveChanges = async () => {
         try {
             const response = await fetch(`${config.bmrServerURL}/api/admin/create/Location`, {
-                method: "POST", // or "PUT" depending on your backend
+                method: "POST", 
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     N_T_M_Location_ID: LocationData.locationID,
                     V_LocationName: LocationData.locationname,
+                    N_T_M_City_ID: LocationData.cityid,
                     B_Active: LocationData.status === 'Active'? 1 :0,
-                    // Add more fields as needed
                 })
             });
     
@@ -37,32 +59,12 @@ export default function LocationsTableComponent({ thead, tbody, fetchLocations }
                 setEditModal(false); // Close modal
                 fetchLocations();
             } else {
-                alert("Failed to update City: " + (result.response || "Unknown error"));
+                alert("Failed to update Location: " + (result.response || "Unknown error"));
             }
         } catch (error) {
-            alert("Failed to update City." );
+            alert("Failed to update Location." );
         }
     };
-    
-
-    useEffect(()=> { setData(tbody) }, [tbody]);
-
-    // const handleCheckbox = (event) => {
-    //     const { name, checked } = event.target;
-
-    //     if(name === "allCheck") {
-    //         const checkData = data?.map((item)=> {
-    //             return { ...item, isChecked: checked };
-    //         });
-    //         setData(checkData);
-    //     }
-    //     else {
-    //         const checkData = data?.map((item) => 
-    //             item.name === name ? {...item, isChecked: checked} : item
-    //         );
-    //         setData(checkData);
-    //     }
-    // }
 
     return (
         <div className="mc-table-responsive">
@@ -71,12 +73,6 @@ export default function LocationsTableComponent({ thead, tbody, fetchLocations }
                     <tr>
                         <th>
                             <div className="mc-table-check">
-                                {/* <input 
-                                    type="checkbox" 
-                                    name="allCheck"
-                                    checked={ data?.filter((item)=> item.isChecked !== true).length < 1 } 
-                                    onChange={ handleCheckbox } 
-                                /> */}
                                 <p>uid</p>
                             </div>
                         </th>
@@ -109,6 +105,7 @@ export default function LocationsTableComponent({ thead, tbody, fetchLocations }
                                 </div>
                             </td> */}
                             <td>{ item.locationname }</td>
+                            <td>{ item.cityname }</td>
                             <td>{ item.status }</td>
                             {/* <td>{ item.date }</td> */}
                             <td>
@@ -140,6 +137,22 @@ export default function LocationsTableComponent({ thead, tbody, fetchLocations }
                             value={LocationData?.locationname || ""} 
                             onChange={(e) => setLocationData(prev => ({ ...prev, locationname: e.target.value }))}
                         />
+                    </Form.Group>
+
+                    <Form.Group className="inline">
+                    <Form.Label>{t('city')}</Form.Label>
+                    <Form.Select
+                        value={LocationData.cityid || ""}
+                        onChange={(e) =>
+                        setLocationData({ ...LocationData, cityid: e.target.value })
+                        }
+                    >
+                        {cityData.map((city) => (
+                        <option key={city.N_T_M_City_ID} value={city.N_T_M_City_ID}>
+                            {city.V_CityName}
+                        </option>
+                        ))}
+                    </Form.Select>
                     </Form.Group>
                     
                    <Form.Group className=" inline">

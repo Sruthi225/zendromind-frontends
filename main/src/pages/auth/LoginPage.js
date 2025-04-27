@@ -42,9 +42,10 @@ export default function LoginPage() {
             const data = await response.json();
 
             if (data?.status_code === 200) {
-                localStorage.setItem("userId", data.info[0]?.N_T_M_User_ID);
-                localStorage.setItem("cityID", data.info[0]?.N_T_M_City_ID);
-                localStorage.setItem("userType", data.info[0]?.V_UserType);
+
+                localStorage.setItem("userId", data.info[0].N_T_M_User_ID);
+                localStorage.setItem("cityID", data.info[0].N_T_M_City_ID);
+                localStorage.setItem("userType", data.info[0].V_UserType);
 
                 navigate("/ecommerce"); // 👈 Redirect to dashboard
             } else {
