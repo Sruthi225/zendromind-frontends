@@ -8,7 +8,9 @@ import { useLocation } from 'react-router-dom';
 // import { useNavigate } from "react-router-dom";
 
 export default function CategoryLocationLinkComponent() {
+    
     const { t } = useContext(TranslatorContext);
+
     const useQuery = () => {
         return new URLSearchParams(useLocation().search);
     };

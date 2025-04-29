@@ -13,20 +13,17 @@ export default function LoginPage() {
     const { t } = useContext(TranslatorContext);
     
     const navigate = useNavigate();
-
-
+    
     const [formData, setFormData] = useState({
         Email: "",
         Password: "",
         UserType: "",
     });
 
-    // 👉 STEP 2: Handle input changes
     const handleChange = (field, value) => {
         setFormData(prev => ({ ...prev, [field]: value }));
     };
 
-    // 👉 STEP 3: Submit form
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -36,7 +33,7 @@ export default function LoginPage() {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ V_UserName: formData.Email, V_Password: formData.Password, V_UserType: formData.UserType }) // send more fields as needed
+                body: JSON.stringify({ V_UserName: formData.Email, V_Password: formData.Password, V_UserType: formData.UserType }) 
             });
 
             const data = await response.json();
@@ -72,7 +69,6 @@ export default function LoginPage() {
                         type="email"
                         classes="w-100 h-sm"
                         placeholder={t('enter_your_email')}
-                        passwordVisible={true}
                         value={formData.Email}
                         onChange={(e) => handleChange("Email", e.target.value)}
                     />

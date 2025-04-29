@@ -15,7 +15,7 @@ import { SidebarProvider } from "./context/Sidebar";
 import { LoaderProvider } from "./context/Preloader";
 import { TranslatorProvider } from "./context/Translator"; 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { LoginPage, RegisterPage, ForgotPasswordPage } from "./pages/auth";
+import { LoginPage, RegisterPage, ForgotPasswordPage, OtpVerificationPage, NewPasswordPage } from "./pages/auth";
 import {  DocumentationPage, ChangeLogPage, ErrorPage } from "./pages/others";
 import { AvatarPage, AlertPage, ButtonPage, ChartPage, TablePage, FieldPage, HeadingPage, ColorPage } from "./pages/ui";
 import { EcommercePage, AnalyticsPage, CRMPage, UserListPage, UserProfilePage, MyAccountPage, 
@@ -40,6 +40,8 @@ const router = createBrowserRouter([
     { path: "/analytics", element: <AnalyticsPage /> },
     { path: "/crm", element: <CRMPage /> },
     { path: "/forgot-password", element: <ForgotPasswordPage /> },
+    { path: "/otp-verification", element: <OtpVerificationPage /> },
+    { path: "/newpassword-save", element: <NewPasswordPage /> },
     { path: "/register", element: <RegisterPage /> },
     { path: "/login", element: <LoginPage /> },
     { path: "/user-list", element: <UserListPage /> },
