@@ -5,6 +5,7 @@
             { 
                 "icon": "dashboard", 
                 "text": "dashboard",
+                "roles": ["Super Admin"], 
                 "submenus": [
                     { "path": "/ecommerce", "text": "ecommerce" }
                 ]
@@ -12,6 +13,7 @@
             { 
                 "icon": "lock", 
                 "text": "authentication",
+                "roles": ["Super Admin"],
                 "submenus": [
                     { "path": "/login", "text": "login" },
                     { "path": "/register", "text": "registration" },
@@ -21,6 +23,7 @@
             { 
                 "icon": "account_circle", 
                 "text": "users", 
+                "roles": ["Super Admin"],
                 "submenus": [
                     { "path": "/user-list", "text": "user_list" },
                     { "path": "/user-profile", "text": "user_profile" },
@@ -30,6 +33,7 @@
             { 
                 "icon": "pix", 
                 "text": "city",
+                "roles": ["Super Admin", "Admin", "Member"],
                 "submenus": [
                     { "path": "/city-list", "text": "city_list" }
                     
@@ -38,6 +42,7 @@
             { 
                 "icon": "pix", 
                 "text": "category",
+                "roles": ["Super Admin", "Admin", "Member"],
                 "submenus": [
                     { "path": "/category-list", "text": "category_list" }
                 ]
@@ -45,6 +50,7 @@
             { 
                 "icon": "pix", 
                 "text": "location",
+                "roles": ["Super Admin", "Admin", "Member"],
                 "submenus": [
                     { "path": "/location-list", "text": "location_list" }
                 ]
@@ -53,6 +59,7 @@
                 "path": "#",
                 "icon": "article", 
                 "text": "items",
+                "roles": ["Super Admin", "Admin", "Member"],
                 "submenus": [
                     { "path": "/items-upload", "text": "items_upload" },
                     { "path": "/item-list", "text": "item_list" }

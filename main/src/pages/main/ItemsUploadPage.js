@@ -85,7 +85,7 @@ export default function ItemsUploadPage() {
 
     const fetchCities = async () => {
         try {
-            const response = await fetch(`${config.bmrServerURL}/api/admin/get/city_list`, {
+            const response = await fetch(`${config.bmrServerURL}/api/admin/get/city_list/${cityid}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"

@@ -13,18 +13,18 @@ export default function LocationsTableComponent({ thead, tbody, fetchLocations }
     const [LocationData, setLocationData] = React.useState("");
     const [cityData, setcityData] = useState([]);
     const [editModal, setEditModal] = React.useState(false);
-    const [blockModal, setBlockModal] = React.useState(false);
 
     useEffect(() => {
         fetchCities();
     }, []);
 
+    let N_T_M_City_ID = localStorage.getItem("cityID");
 
     useEffect(()=> { setData(tbody) }, [tbody]);
 
     const fetchCities = async () => {
         try {
-            const response = await fetch(`${config.bmrServerURL}/api/admin/get/city_list`, {
+            const response = await fetch(`${config.bmrServerURL}/api/admin/get/city_list/${N_T_M_City_ID}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"

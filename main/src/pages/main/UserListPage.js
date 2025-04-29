@@ -131,6 +131,8 @@ export default function UserListPage() {
                                     name: user.V_Name,
                                     username: user.V_UserName,
                                     role: user.V_UserType,
+                                    cityid: user.N_T_M_City_ID,
+                                    cityname: user.V_CityName,
                                     status: user.B_Active === 1 ? "Active" : "InActive",
                                     date: new Date(user.D_InsertedOn).toLocaleDateString(),
                                     action: { edit: "edit",  view: "visibility" }

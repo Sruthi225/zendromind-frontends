@@ -50,7 +50,7 @@ export default function CategoriesUploadTableComponent({ show, onHide, fetchCate
         const result = await response.json();
 
         if (result.status_code === 200) {
-            onHide(); // Close modal after upload
+            onHide(); 
             fetchCategories();
         } else {
             alert("Failed to update City: " + (result.response || "Unknown error"));
@@ -83,8 +83,6 @@ export default function CategoriesUploadTableComponent({ show, onHide, fetchCate
                         ...prev,
                         logofile: file, 
                         }));
-
-                        // Generate preview
                         const reader = new FileReader();
                         reader.onloadend = () => {
                         setFormData((prev) => ({
@@ -96,7 +94,6 @@ export default function CategoriesUploadTableComponent({ show, onHide, fetchCate
                     }
                     }}
             />
-=
             {formData.logopreview && (
                 <img
                 src={formData.logopreview}
@@ -117,8 +114,6 @@ export default function CategoriesUploadTableComponent({ show, onHide, fetchCate
                         ...prev,
                         digitalfile: file, 
                         }));
-
-                        // Generate preview
                         const reader = new FileReader();
                         reader.onloadend = () => {
                         setFormData((prev) => ({

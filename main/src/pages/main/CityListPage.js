@@ -20,13 +20,17 @@ export default function CityListPage() {
     const [searchTerm, setSearchTerm] = useState("");
     const [showUploadModal, setShowUploadModal] = useState(false);
 
+    let N_T_M_City_ID = localStorage.getItem("cityID");
+
+    console.log('cityid.........................', N_T_M_City_ID)
+
     useEffect(() => {
         fetchCities();
     }, []);
 
     const fetchCities = async () => {
         try {
-            const response = await fetch(`${config.bmrServerURL}/api/admin/get/city_list`, {
+            const response = await fetch(`${config.bmrServerURL}/api/admin/get/city_list/${N_T_M_City_ID}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -40,9 +44,7 @@ export default function CityListPage() {
     };
 
     const floats = [
-        { "title": "total_City", "digit": 547, "icon": "shopping_bag", "variant": "lg blue" }, 
-        // { "title": "total_categories", "digit": 605, "icon": "widgets", "variant": "lg green" },
-        // { "title": "total_barnds", "digit": 249, "icon": "verified_city", "variant": "lg purple" }
+        { "title": "total_City", "digit": `${cityData.length}`, "icon": "shopping_bag", "variant": "lg blue" }
     ]
 
     return (
@@ -60,7 +62,8 @@ export default function CityListPage() {
                         </div>
                     </div>
                 </Col>
-                {floats.map((float, index) => (
+                {N_T_M_City_ID === 'null' && (
+                floats.map((float, index) => (
                     <Col key={ index } sm={6} lg={4}>
                         <FloatCardComponent 
                             variant={ float.variant }
@@ -69,10 +72,11 @@ export default function CityListPage() {
                             icon={ float.icon }
                         />
                     </Col>
-                ))}
+                )))}
                 <Col xl={12}>
                     <div className="mc-card">
                         <Row>
+                            
                             <Col xs={12} sm={6} md={4} lg={5}>
                                 <LabelFieldComponent
                                     type="search"
@@ -83,9 +87,12 @@ export default function CityListPage() {
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                 />
                             </Col>
-                             <Col xs={12} sm={6} md={4} lg={7} className="d-flex justify-content-end  mt-4">
+                            {N_T_M_City_ID === 'null' && (
+                                <Col xs={12} sm={6} md={4} lg={7} className="d-flex justify-content-end  mt-4">
                                 <ButtonComponent  type="button" className="btn btn-success" style={{ height: '38px', width: '200px' }} onClick={() => setShowUploadModal(true)}>{t('add city')}</ButtonComponent>
-                            </Col>
+                                </Col>
+                            )}
+                             
                             <Col xl={12}>
                                 <CitiesTableComponent 
                                      thead={ ["Image","CityName", "Status", "Date", "Actions"]} 
@@ -103,7 +110,9 @@ export default function CityListPage() {
                                     }
                                     fetchCities={fetchCities}
                                 />
-                                <PaginationComponent />
+                                {N_T_M_City_ID === 'null' && (
+                                    <PaginationComponent />
+                                )}
                             </Col>
                         </Row>
                     </div>

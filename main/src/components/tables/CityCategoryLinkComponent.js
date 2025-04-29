@@ -25,10 +25,11 @@ export default function CityCategoryLinkComponent() {
         }
     }, [categoryid]);
     
+    let N_T_M_City_ID = localStorage.getItem("cityID");
 
     const fetchCategories = async () => {
         try {
-            const response = await fetch(`${config.bmrServerURL}/api/admin/get/citylist/${categoryid}`, {
+            const response = await fetch(`${config.bmrServerURL}/api/admin/get/citylist/${categoryid}/${N_T_M_City_ID}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"

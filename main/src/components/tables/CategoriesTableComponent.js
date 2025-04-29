@@ -52,7 +52,7 @@ export default function CategoriesTableComponent({ thead, tbody, fetchCategories
         try {
             result = await response.json();
         } catch (jsonError) {
-            const text = await response.text(); // this will now work because response is still accessible
+            const text = await response.text(); 
             console.error("Failed to parse JSON:", jsonError);
             console.error("Raw response text:", text);
             alert("Server response is not valid JSON.");
@@ -69,23 +69,6 @@ export default function CategoriesTableComponent({ thead, tbody, fetchCategories
     
 
     useEffect(()=> { setData(tbody) }, [tbody]);
-
-    // const handleCheckbox = (event) => {
-    //     const { name, checked } = event.target;
-
-    //     if(name === "allCheck") {
-    //         const checkData = data?.map((item)=> {
-    //             return { ...item, isChecked: checked };
-    //         });
-    //         setData(checkData);
-    //     }
-    //     else {
-    //         const checkData = data?.map((item) => 
-    //             item.name === name ? {...item, isChecked: checked} : item
-    //         );
-    //         setData(checkData);
-    //     }
-    // }
 
     return (
         <div className="mc-table-responsive">
@@ -177,34 +160,27 @@ export default function CategoriesTableComponent({ thead, tbody, fetchCategories
                     </Form.Group>
                     <Form.Group className="inline mb-4">
                         <Form.Label>{t('Logo')}</Form.Label>
-                        
-                        {/* Image Upload Input */}
                         <Form.Control
                             type="file"
                             accept="image/*"
                             onChange={(e) => {
                                 const file = e.target.files[0];
                                 if (file) {
-                                    // Set image file for backend
                                     setCategoryData((prev) => ({
                                     ...prev,
-                                    logofile: file, // raw file for backend
+                                    logofile: file,
                                     }));
-    
-                                    // Generate preview
                                     const reader = new FileReader();
                                     reader.onloadend = () => {
                                     setCategoryData((prev) => ({
                                         ...prev,
-                                        logopreview: reader.result, // base64 preview
+                                        logopreview: reader.result, 
                                     }));
                                     };
                                     reader.readAsDataURL(file);
                                 }
                                 }}
                         />
-                        
-                        {/* Image Preview */}
                         {categoryData?.logopreview && (
                             <img
                                 src={categoryData.logopreview}
@@ -215,34 +191,27 @@ export default function CategoriesTableComponent({ thead, tbody, fetchCategories
                     </Form.Group>
                     <Form.Group className="inline mb-4">
                         <Form.Label>{t('Image')}</Form.Label>
-                        
-                        {/* Image Upload Input */}
                         <Form.Control
                             type="file"
                             accept="image/*"
                             onChange={(e) => {
                                 const file = e.target.files[0];
                                 if (file) {
-                                    // Set image file for backend
                                     setCategoryData((prev) => ({
                                     ...prev,
-                                    digitalfile: file, // raw file for backend
+                                    digitalfile: file,
                                     }));
-    
-                                    // Generate preview
                                     const reader = new FileReader();
                                     reader.onloadend = () => {
                                     setCategoryData((prev) => ({
                                         ...prev,
-                                        digitalpreview: reader.result, // base64 preview
+                                        digitalpreview: reader.result, 
                                     }));
                                     };
                                     reader.readAsDataURL(file);
                                 }
                                 }}
                         />
-
-                        {/* Image Preview */}
                         {categoryData?.digitalpreview && (
                             <img
                                 src={categoryData.digitalpreview}
@@ -254,7 +223,7 @@ export default function CategoriesTableComponent({ thead, tbody, fetchCategories
                     
                    <Form.Group className=" inline">
                         <Form.Label>{t('status')}</Form.Label>
-                        <Form.Select value={categoryData.status || ""} // default to empty string if undefined
+                        <Form.Select value={categoryData.status || ""} 
                         onChange={(e) => setCategoryData({ ...categoryData, status: e.target.value })}>
                             <option value="Active">{t('Active')}</option>
                             <option value="InActive">{t('InActive')}</option>

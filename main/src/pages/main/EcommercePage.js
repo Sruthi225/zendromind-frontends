@@ -1,15 +1,39 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { TranslatorContext } from "../../context/Translator";
 import { Link } from "react-router-dom";
 import { Row, Col } from "react-bootstrap";
 import { EcommerceCardComponent, SalesCardComponent, ProductsCardComponent, RevenueCardComponent, ClientsCardComponent, ActivityCardComponent, OrdersCardComponent } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import heros from "../../assets/data/heros.json";
+import config from "../../components/commonservices";
 
 
 export default function EcommercePage() {
 
     const { t, n } = useContext(TranslatorContext);
+
+    const [cardData, setCardData] = useState([]);
+
+    useEffect(() => {
+            fetchCount();
+        }, []);
+
+    const fetchCount = async () => {
+        try {
+            const response = await fetch(`${config.bmrServerURL}/api/admin/dashboard/count`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            const data = await response.json();
+            console.log(data)
+            setCardData(data.info || []);
+
+        } catch (error) {
+            console.error("Error fetching count:", error);
+        } 
+    };
 
     return (
         <PageLayout>
@@ -26,28 +50,22 @@ export default function EcommercePage() {
                         </div>
                     </div>
                 </Col>
-                <Col xs={12} xl={8}>
-                    <Row xs={1} sm={2}>
-                        {heros.map((hero, index) => (
-                            <Col key={index}>
-                                <EcommerceCardComponent
-                                    icon={hero.icon}
-                                    trend={hero.trend}
-                                    title={t(hero.title)}
-                                    variant={hero.variant}
-                                    number={n(hero.number)}
-                                    percent={hero.percent} 
-                                />
-                            </Col>
+                <Col xs={12} xl={12}>
+                    <Row xs={1} sm={3}>
+                        {cardData.map((card, index) => (
+                        <Col key={index}>
+                            <EcommerceCardComponent
+                            icon={card.Icon}
+                            trend={card.Trend}
+                            title={t(card.Name)}
+                            variant={card.Variant}
+                            number={n(card.Count)}
+                            percent={card.percent}
+                            />
+                        </Col>
                         ))}
                     </Row>
                 </Col>
-                <Col xs={12} xl={4}> <SalesCardComponent /> </Col>
-                <Col xl={12}> <ProductsCardComponent /> </Col>
-                <Col xl={8}> <RevenueCardComponent /> </Col>
-                <Col xl={4}> <OrdersCardComponent /> </Col>
-                <Col xl={6}> <ClientsCardComponent /> </Col>
-                <Col xl={6}> <ActivityCardComponent /> </Col>
             </Row>
         </PageLayout>
     );

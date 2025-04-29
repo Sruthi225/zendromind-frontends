@@ -1,5 +1,5 @@
 
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { TranslatorContext } from "../../context/Translator";
 import { ButtonComponent, AnchorComponent } from "../../components/elements";
 import IconFieldComponent from "../../components/fields/IconFieldComponent";
@@ -18,21 +18,37 @@ export default function RegisterPage() {
         UserName: "",
         Password: "",
         ConfirmPassword: "",
-        UserType: ""
+        UserType: "",
+        cityname: ""
     });
+
+    const[cityData, setcityData] = useState([]);
 
     const [passwordError, setPasswordError] = useState(false);
 
-    // // 👉 STEP 2: Handle input changes
-    // const handleChange = (field, value) => {
-    //     setFormData(prev => ({ ...prev, [field]: value }));
-    // };
+    useEffect(() => {
+        fetchCities();
+    }, []);
+
+    const fetchCities = async () => {
+        try {
+            const response = await fetch(`${config.bmrServerURL}/api/admin/get/user_city_list`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            const data = await response.json();
+            setcityData(data.info);
+        } catch (error) {
+            console.error("Error fetching cities:", error);
+        } 
+    };
 
     const handleChange = (field, value) => {
         setFormData(prev => {
             const updated = { ...prev, [field]: value };
-    
-            // Live check for password match when ConfirmPassword changes
+
             if (field === "ConfirmPassword" || field === "Password") {
                 setPasswordError(
                     updated.Password && updated.ConfirmPassword && updated.Password !== updated.ConfirmPassword
@@ -43,9 +59,11 @@ export default function RegisterPage() {
         });
     };
 
-    // 👉 STEP 3: Submit form
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const selectedCity = cityData.find(city => city.V_CityName === formData.cityname);
+        const cityId = selectedCity?.N_T_M_City_ID || null;
 
         try {
             const response = await fetch(`${config.bmrServerURL}/api/admin/user/register`, {
@@ -56,13 +74,14 @@ export default function RegisterPage() {
                 body: JSON.stringify({V_Name: formData.Name, 
                                       V_UserName: formData.UserName, 
                                       V_Password: formData.Password,
-                                      V_UserType: formData.UserType
-                                     }) // send more fields as needed
+                                      V_UserType: formData.UserType,
+                                      N_T_M_City_ID: cityId
+                                     }) 
             });
 
             const data = await response.json();
             if (data?.status_code === 200) {
-                navigate("/user-list"); // 👈 Redirect to dashboard
+                navigate("/user-list"); 
             } else {
                 alert(data.response || "Unable to Register the User.");
             }
@@ -122,14 +141,28 @@ export default function RegisterPage() {
                         Passwords do not match.
                     </p>
                 )}
+                
                 <IconFieldComponent 
                     icon="verified_user"
                     classes="w-100 h-sm"
                     option={["Super Admin", "Admin", "Member", "Client", "Manager", "Vendor"]}
+                    activeOption="Select Role"
                     passwordVisible={true}
                     value={formData.UserType}
                     onChange={(e) => handleChange("UserType", e.target.value)}
                 />
+                {formData.UserType !== "Super Admin" && (
+                    <IconFieldComponent 
+                    icon="verified_user"
+                    classes="w-100 h-sm"
+                    option={cityData.map(city => city.V_CityName)}
+                    activeOption="Select City"
+                    passwordVisible={true}
+                    value={cityData.cityname}
+                    onChange={(e) => handleChange("cityname", e.target.value)}
+                    />
+                )}
+                
                 {/* <div className="mc-auth-checkbox">
                     <input type="checkbox" id="checkbox" />
                     <label htmlFor="checkbox">I agree to the all Terms & Condiotions</label>

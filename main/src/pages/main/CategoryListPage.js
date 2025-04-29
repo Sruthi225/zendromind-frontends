@@ -24,6 +24,7 @@ export default function CategoryListPage() {
         fetchCategories();
     }, []);
 
+
     const fetchCategories = async () => {
         try {
             const response = await fetch(`${config.bmrServerURL}/api/admin/get/category_list`, {
@@ -40,9 +41,7 @@ export default function CategoryListPage() {
     };
 
     const floats = [
-        { "title": "total_City", "digit": 547, "icon": "shopping_bag", "variant": "lg blue" }, 
-        // { "title": "total_categories", "digit": 605, "icon": "widgets", "variant": "lg green" },
-        // { "title": "total_barnds", "digit": 249, "icon": "verified_city", "variant": "lg purple" }
+        { "title": "total_City", "digit": 547, "icon": "shopping_bag", "variant": "lg blue" }
     ]
 
     return (

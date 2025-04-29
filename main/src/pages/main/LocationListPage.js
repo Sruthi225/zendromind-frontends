@@ -20,6 +20,7 @@ export default function LocationListPage() {
     const [searchTerm, setSearchTerm] = useState("");
     const [showUploadModal, setShowUploadModal] = useState(false);
 
+    let N_T_M_City_ID = localStorage.getItem("cityID");
 
     useEffect(() => {
         fetchLocations();
@@ -27,7 +28,7 @@ export default function LocationListPage() {
 
     const fetchLocations = async () => {
         try {
-            const response = await fetch(`${config.bmrServerURL}/api/admin/get/Location_list`, {
+            const response = await fetch(`${config.bmrServerURL}/api/admin/get/Location_list/${N_T_M_City_ID}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"

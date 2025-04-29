@@ -10,8 +10,8 @@ export default function CitiesUploadTableComponent({ show, onHide, fetchCities }
 
     const [formData, setFormData] = useState({
         cityname: "",
-        digitalfile: "",       // actual File object
-        digitalpreview: "",      // base64 preview (optional)
+        digitalfile: "",     
+        digitalpreview: "",      
         status: "Active"
       });
       
@@ -20,7 +20,7 @@ export default function CitiesUploadTableComponent({ show, onHide, fetchCities }
     form.append("N_T_M_City_ID", '');
     form.append("V_CityName", formData.cityname);
     form.append("B_Active", formData.status);
-    form.append("V_DigitalFile", formData.digitalfile); // The file object
+    form.append("V_DigitalFile", formData.digitalfile); 
 
     const handleChange = (field, value) => {
             setFormData(prev => ({ ...prev, [field]: value }));
@@ -30,14 +30,14 @@ export default function CitiesUploadTableComponent({ show, onHide, fetchCities }
 
     try {
         const response = await fetch(`${config.bmrServerURL}/api/admin/create/city`, {
-            method: "POST", // or "PUT" depending on your backend
+            method: "POST", 
             body: form
         });
 
 
         const result = await response.json();
         if (result.status_code === 200) {
-            onHide(); // Close modal after upload
+            onHide(); 
             fetchCities();
         } else {
             alert("Failed to update City: " + (result.response || "Unknown error"));
@@ -66,26 +66,21 @@ export default function CitiesUploadTableComponent({ show, onHide, fetchCities }
                 onChange={(e) => {
                     const file = e.target.files[0];
                     if (file) {
-                      // Store the raw file for upload
                       setFormData(prev => ({
                         ...prev,
                         digitalfile: file
                       }));
-              
-                      // Optional: Generate preview
                       const reader = new FileReader();
                       reader.onloadend = () => {
                         setFormData(prev => ({
                           ...prev,
-                          digitalpreview: reader.result // used only for preview
+                          digitalpreview: reader.result
                         }));
                       };
                       reader.readAsDataURL(file);
                     }
                   }}
             />
-                                
-                                {/* Image Preview */}
                 {formData.digitalpreview && (
                     <img
                     src={formData.digitalpreview}

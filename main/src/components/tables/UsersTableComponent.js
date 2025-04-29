@@ -10,9 +10,28 @@ export default function UsersTableComponent({ thead, tbody,  fetchUsers }) {
     const { t } = useContext(TranslatorContext)
 
     const [data, setData] = useState([]);
+    const [cityData, setCityData] = useState([]);
     const [userData, setUserData] = React.useState("");
     const [editModal, setEditModal] = React.useState(false);
-    const [blockModal, setBlockModal] = React.useState(false);
+
+    useEffect(() => {
+        fetchCities();
+    }, []);
+
+    const fetchCities = async () => {
+        try {
+            const response = await fetch(`${config.bmrServerURL}/api/admin/get/user_city_list`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            });
+            const data = await response.json();
+            setCityData(data.info);
+        } catch (error) {
+            console.error("Error fetching cities:", error);
+        } 
+    };
 
 
     useEffect(()=> { setData(tbody) }, [tbody]);
@@ -20,23 +39,23 @@ export default function UsersTableComponent({ thead, tbody,  fetchUsers }) {
     const handleSaveChanges = async () => {
         try {
             const response = await fetch(`${config.bmrServerURL}/api/admin/update/users/${userData.N_T_M_User_ID}`, {
-                method: "PUT", // or "PUT" depending on your backend
+                method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
                     V_Name: userData.name,
                     V_UserName: userData.username,
-                    C_UserType: userData.role,
+                    V_UserType: userData.role,
+                    N_T_M_City_ID: userData.cityid,
                     B_Active: userData.status === 'Active'? 1 :0,
-                    // Add more fields as needed
                 })
             });
     
             const result = await response.json();
     
             if (result.status_code === 200) {
-                setEditModal(false); // Close modal
+                setEditModal(false);
                 fetchUsers();
             } else {
                 alert("Failed to update user: " + (result.response || "Unknown error"));
@@ -46,23 +65,6 @@ export default function UsersTableComponent({ thead, tbody,  fetchUsers }) {
         }
     };
     
-
-    // const handleCheckbox = (event) => {
-    //     const { name, checked } = event.target;
-
-    //     if(name === "allCheck") {
-    //         const checkData = data?.map((item)=> {
-    //             return { ...item, isChecked: checked };
-    //         });
-    //         setData(checkData);
-    //     }
-    //     else {
-    //         const checkData = data?.map((item) => 
-    //             item.name === name ? {...item, isChecked: checked} : item
-    //         );
-    //         setData(checkData);
-    //     }
-    // }
 
     return (
         <div className="mc-table-responsive">
@@ -123,6 +125,7 @@ export default function UsersTableComponent({ thead, tbody,  fetchUsers }) {
                                     <span>{ item.role }</span>
                                 </div> */}
                             </td>
+                            <td title={ item.cityname }>{ item.cityname || 'All' }</td>
                             <td title={ item.status }>
                                 { item.status === "Active" && <p className="mc-table-badge green">{ item.status }</p> }
                                 { item.status === "InActive" && <p className="mc-table-badge purple">{ item.status }</p> }
@@ -160,7 +163,7 @@ export default function UsersTableComponent({ thead, tbody,  fetchUsers }) {
                     </Form.Group>
                     <Form.Group className=" inline mb-4">
                         <Form.Label>{t('role')}</Form.Label>
-                        <Form.Select value={userData.role || ""} // default to empty string if undefined
+                        <Form.Select value={userData.role || ""} 
                         onChange={(e) => setUserData({ ...userData, role: e.target.value })}>
                             <option value="Super Admin">{t('Super Admin')}</option>
                             <option value="Admin">{t('Admin')}</option>
@@ -169,9 +172,25 @@ export default function UsersTableComponent({ thead, tbody,  fetchUsers }) {
                             <option value="Vendor">{t('Vendor')}</option>
                         </Form.Select>
                     </Form.Group>
+                    {userData.role !== "Super Admin" && (
+                        <Form.Group className="inline mb-4">
+                            <Form.Label>{t('City')}</Form.Label>
+                            <Form.Select
+                                value={userData.cityid || ""} 
+                                onChange={(e) => setUserData({ ...userData, cityid: e.target.value })} 
+                            >
+                                <option value="">{t('Select City')}</option>
+                                {cityData.map((city) => (
+                                    <option key={city.N_T_M_City_ID} value={city.N_T_M_City_ID}>
+                                        {city.V_CityName}
+                                    </option>
+                                ))}
+                            </Form.Select>
+                        </Form.Group>
+                    )}
                     <Form.Group className=" inline">
                         <Form.Label>{t('status')}</Form.Label>
-                        <Form.Select value={userData.status || ""} // default to empty string if undefined
+                        <Form.Select value={userData.status || ""}
                         onChange={(e) => setUserData({ ...userData, status: e.target.value })}>
                             <option value="Active">{t('Active')}</option>
                             <option value="InActive">{t('InActive')}</option>

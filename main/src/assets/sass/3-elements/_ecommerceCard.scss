@@ -53,6 +53,17 @@
         .mc-ecommerce-card-compare mark { background-color: $yellow-800; }
         .mc-dropdown-toggle { color: $yellow-800; }
     }
+
+    &.red {
+        .mc-ecommerce-card-icon {
+            color: $red-400;
+            background: linear-gradient($red-600, $red-700);
+        }
+
+        .mc-ecommerce-card-trend { color: $red-700; }
+        .mc-ecommerce-card-compare mark { background-color: $red-800; }
+        .mc-dropdown-toggle { color: $red-800; }
+    }
 }
 
 [dir="ltr"] {
@@ -61,6 +72,7 @@
         &.green { background: linear-gradient(to left, $green-500, $green-700) }
         &.purple { background: linear-gradient(to left, $purple-500, $purple-700) }
         &.yellow { background: linear-gradient(to left, $yellow-500, $yellow-700) }
+        &.red { background: linear-gradient(to left, $red-500, $red-700) }
     }
 }
 

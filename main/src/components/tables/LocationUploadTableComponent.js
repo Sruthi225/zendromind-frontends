@@ -17,10 +17,11 @@ export default function LocationUploadTableComponent({ show, onHide, fetchLocati
       fetchCities();
   }, []);
 
+  let N_T_M_City_ID = localStorage.getItem("cityID");
 
   const fetchCities = async () => {
       try {
-          const response = await fetch(`${config.bmrServerURL}/api/admin/get/city_list`, {
+          const response = await fetch(`${config.bmrServerURL}/api/admin/get/city_list/${N_T_M_City_ID}`, {
               method: "GET",
               headers: {
                   "Content-Type": "application/json"

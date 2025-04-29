@@ -9,6 +9,8 @@ export default function SidebarLayout() {
     const { t, n, currentLanguage } = useContext(TranslatorContext);
     const { sidebar } = useContext(SidebarContext);
 
+    const userType = localStorage.getItem("userType");
+
     const handleDropdown = (event) => {
         const buttonElement = event.currentTarget;
         const itemElement = buttonElement.parentElement;
@@ -36,7 +38,9 @@ export default function SidebarLayout() {
                 <menu key={sidenavIndex}  className="mc-sidebar-menu">
                     <h5 className="mc-sidebar-menu-title">{t(sidenav.title)}</h5>
                     <ul className="mc-sidebar-menu-list">
-                        {sidenav.menus.map((menu, menuIndex) => ( 
+                        {sidenav.menus
+                            .filter(menu => !menu.roles || menu.roles.includes(userType)) 
+                            .map((menu, menuIndex) => ( 
                             <li key={menuIndex} className='mc-sidebar-menu-item'>
                                 {menu.submenus ?
                                     <>

@@ -42,12 +42,11 @@ export default function LoginPage() {
             const data = await response.json();
 
             if (data?.status_code === 200) {
-
                 localStorage.setItem("userId", data.info[0].N_T_M_User_ID);
                 localStorage.setItem("cityID", data.info[0].N_T_M_City_ID);
                 localStorage.setItem("userType", data.info[0].V_UserType);
 
-                navigate("/ecommerce"); // 👈 Redirect to dashboard
+                navigate("/ecommerce"); 
             } else {
                 alert(data.response || "Login failed");
             }
@@ -95,8 +94,9 @@ export default function LoginPage() {
                         onChange={(e) => handleChange("UserType", e.target.value)}
                     />
                     <ButtonComponent className='mc-auth-btn h-sm' type='submit'>{t('sign_in')}</ButtonComponent>
-                    <AnchorComponent className="mc-auth-forgot" to="/forgot-password">{t('forgot_password')}</AnchorComponent>
-
+                    {formData.UserType === "Super Admin" && (
+                        <AnchorComponent className="mc-auth-forgot" to="/forgot-password">{t('forgot_password')}</AnchorComponent>
+                    )}
                 </form>
                 {/* <div className="mc-auth-navigate">
                     <span>Don't have an account?</span>

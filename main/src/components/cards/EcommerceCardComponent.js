@@ -16,7 +16,7 @@ export default function EcommerceCardComponent({ variant, trend, number, title, 
                 </h4>
                 <i className="mc-ecommerce-card-icon material-icons">{ icon }</i>
             </div>
-            <div className="mc-ecommerce-card-foot">
+            {/* <div className="mc-ecommerce-card-foot">
                 <div className="mc-ecommerce-card-compare">
                     <mark>+ { percent }%</mark>
                     <span>{t('last_month')}</span>
@@ -32,7 +32,7 @@ export default function EcommerceCardComponent({ variant, trend, number, title, 
                         <button type='button' className='mc-dropdown-menu'><i className='material-icons'>history</i><span>{t('last_year')}</span></button>
                     </Dropdown.Menu>
                 </Dropdown>
-            </div>
+            </div> */}
         </div>
     );
 }
