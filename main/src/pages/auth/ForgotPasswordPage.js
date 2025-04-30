@@ -12,6 +12,7 @@ export default function ForgotPasswordPage() {
 
     const navigate = useNavigate();
 
+
     const [formData, setFormData] = useState({
         Email: ""
     });
@@ -24,12 +25,13 @@ export default function ForgotPasswordPage() {
         e.preventDefault();
 
         try {
+            let userID = localStorage.getItem("userId");
             const response = await fetch(`${config.bmrServerURL}/api/admin/user/emailroleverification_otpsend`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ V_UserName: formData.Email}) 
+                body: JSON.stringify({ V_UserName: formData.Email, N_T_M_User_ID: userID}) 
             });
 
             const data = await response.json();

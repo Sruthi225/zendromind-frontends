@@ -18,7 +18,6 @@ export default function NewPasswordPage() {
     };
     const query = useQuery();
     const UserID = query.get('userID');
-    
 
     const [formData, setFormData] = useState({
         password: "",
@@ -45,6 +44,8 @@ export default function NewPasswordPage() {
         e.preventDefault();
 
         try {
+            let Is_UserLogin = localStorage.getItem("userId");
+            console.log('userid............................',Is_UserLogin)
             const response = await fetch(`${config.bmrServerURL}/api/admin/user/newpasswordsave`, {
                 method: "POST",
                 headers: {
@@ -59,7 +60,12 @@ export default function NewPasswordPage() {
                 alert(data.response); 
             }
             else{
-                navigate(`/login`); 
+                if(Is_UserLogin !== undefined){
+                    navigate(`/ecommerce`); 
+                }
+                else{
+                    navigate(`/login`); 
+                }   
             }
         } catch (error) {
             console.error("Error:", error);

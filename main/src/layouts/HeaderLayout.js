@@ -323,7 +323,7 @@ export default function HeaderLayout() {
                         <Dropdown.Menu align="end" className="mc-dropdown-paper">
                             <Link to='/my-account' className='mc-dropdown-menu'><i className='material-icons'>person</i><span>{t('my_account')}</span></Link>
                             <Link to='/forgot-password' className='mc-dropdown-menu'><i className='material-icons'>privacy_tip</i><span>{t('reset_password')}</span></Link>
-                            <Link to='/login' className='mc-dropdown-menu'><i className='material-icons'>lock</i><span>{t('logout')}</span></Link>
+                            <Link to='/login' className='mc-dropdown-menu' onClick={() => localStorage.removeItem("userId")}><i className='material-icons'>lock</i><span>{t('logout')}</span></Link>
                         </Dropdown.Menu>
                     </Dropdown>
                     {/*================================
