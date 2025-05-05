@@ -1,23 +1,48 @@
 import Link from "next/link";
 import React, { Fragment } from "react";
 
+// export const Home = () => (
+//   <Fragment>
+//     <li className="menu-item">
+//       <Link href="/">Home One</Link>
+//     </li>
+//     <li className="menu-item">
+//       <Link href="/index-2">Home Two</Link>
+//     </li>
+//     <li className="menu-item">
+//       <Link href="/index-3">Home Three</Link>
+//     </li>
+//   </Fragment>
+// );
+
 export const Home = () => (
   <Fragment>
     <li className="menu-item">
-      <Link href="/">Home One</Link>
+      <Link href="/">Home</Link>
     </li>
-    <li className="menu-item">
+    {/* <li className="menu-item">
       <Link href="/index-2">Home Two</Link>
     </li>
     <li className="menu-item">
       <Link href="/index-3">Home Three</Link>
-    </li>
+    </li> */}
   </Fragment>
 );
+
+
+
+
 export const About = () => (
   <Fragment>
     <li className="menu-item">
-      <Link href="/about">About us</Link>
+      <Link href="/category">Category</Link>
+    </li>
+  </Fragment>
+);
+export const Blog = () => (
+  <Fragment>
+    <li className="menu-item">
+      <Link href="/blog">Blog</Link>
     </li>
   </Fragment>
 );
@@ -59,16 +84,16 @@ export const Pages = () => (
     </li>
   </Fragment>
 );
-export const Blog = () => (
-  <Fragment>
-    <li className="menu-item">
-      <Link href="/blog">Our Blog</Link>
-    </li>
-    <li className="menu-item">
-      <Link href="/blog-details">Blog details</Link>
-    </li>
-  </Fragment>
-);
+// export const Blog = () => (
+//   <Fragment>
+//     <li className="menu-item">
+//       <Link href="/blog">Our Blog</Link>
+//     </li>
+//     <li className="menu-item">
+//       <Link href="/blog-details">Blog details</Link>
+//     </li>
+//   </Fragment>
+// );
 export const Contact = () => (
   <Fragment>
     <li className="menu-item">

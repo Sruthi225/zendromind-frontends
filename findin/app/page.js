@@ -6,6 +6,8 @@ import SearchForm from '@/src/components/SearchForm';
 import DestinationCategory from '@/src/components/DestinationCategory';
 import LatestDestination from '@/src/components/LatestDestination';
 import TestimoinalSlider2 from "@/src/components/Slider/TestimonialSlider2";
+
+import ImageGrid from '@/src/components/ImageGrid';
 import {
   ClientSliderOne,
   ListingSliderOne,
@@ -55,6 +57,27 @@ const Index = () => {
 
 
 
+      {/*====== Start Latest Destination Section ======*/}
+      <section className="category-area pt-110 pb-30">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="col-lg-6">
+              <div className="section-title section-title-two text-center  wow fadeInUp">
+                <h2>
+                  <span className="line">Listed</span> Business
+                </h2>
+              </div>
+            </div>
+          </div>
+
+
+          <div style={{ width: "100%", maxWidth: "1200px", margin: "auto" }}>
+            <LatestDestination />
+          </div>
+
+        </div>
+      </section>
+      {/*====== End Latest Desstination Section ======*/}
 
 
 
@@ -65,7 +88,7 @@ const Index = () => {
             <div className="col-lg-6">
               <div className="section-title section-title-two text-center mb-60 wow fadeInUp">
                 <h2>
-                  <span className="line">Destination</span> Category
+                  <span className="line">Prime</span> Categories
                 </h2>
               </div>
             </div>
@@ -85,27 +108,6 @@ const Index = () => {
 
 
 
-{/*====== Start Latest Destination Section ======*/}
-<section className="category-area pt-110 pb-30">
-        <div className="container">
-          <div className="row justify-content-center">
-            <div className="col-lg-6">
-              <div className="section-title section-title-two text-center  wow fadeInUp">
-                <h2>
-                  <span className="line">Latest</span> Destination
-                </h2>
-              </div>
-            </div>
-          </div>
-          
-            
-          <div style={{ width: "100%", maxWidth: "1200px", margin: "auto" }}>
-  <LatestDestination />
-</div>
- 
-        </div>
-      </section>
-      {/*====== End Latest Desstination Section ======*/}
      
 
 
@@ -127,12 +129,10 @@ const Index = () => {
         >
           <div className="container">
             <div className="row align-items-center">
-              <div className="col-lg-7">
-                <div className="company-name wow fadeInLeft">Bangalore</div>
-              </div>
-              <div className="col-lg-5">
+              <div className="col-lg-12 pb-20">
+                {/* <div className="company-name wow fadeInLeft">Bangalore</div> */}
                 <div className="cta-content-box fadeInRight">
-                  <h2>Visit the Best Places</h2>
+                  <h2>Find Upcoming Events in Bangalore</h2>
                   <p>
                     Pharetra venenatis ante pulvinar fermentum dignissim one
                     malesuada laoreet ridiculus fringilla quam
@@ -141,7 +141,19 @@ const Index = () => {
                     Explore Now
                   </Link>
                 </div>
+
               </div>
+                
+
+              <ImageGrid/>
+
+
+              
+
+
+
+              
+              
             </div>
           </div>
         </div>
@@ -160,7 +172,7 @@ const Index = () => {
             <div className="col-lg-6">
               <div className="section-title section-title-two text-center mb-55 wow fadeInUp">
                 <h2>
-                  <span className="line">Featured</span> Places
+                  <span className="line">Tourist</span> Destinations
                 </h2>
               </div>
             </div>
@@ -316,7 +328,7 @@ const Index = () => {
       {/*====== End Place Section ======*/}
 
       {/*====== Start Testimonial Section ======*/}
-            <section className="testimonial-area pt-120 pb-120">
+            {/* <section className="testimonial-area pt-120 pb-120">
               <div className="container">
                 <div className="testimonial-wrapper-two">
                   <div className="row no-gutters">
@@ -349,7 +361,7 @@ const Index = () => {
                   </div>
                 </div>
               </div>
-            </section>
+            </section> */}
             {/*====== End Testimonial Section ======*/}
 
 

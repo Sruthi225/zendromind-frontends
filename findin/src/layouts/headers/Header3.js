@@ -44,10 +44,10 @@ const Header3 = () => {
             </div>
             <div className="col-md-4">
               <div className="top-content text-center">
-                <p>
+                {/* <p>
                   We Have Special Offers Every{" "}
                   <Link href="/">Find your offer</Link>
-                </p>
+                </p> */}
               </div>
             </div>
             <div className="col-md-4">

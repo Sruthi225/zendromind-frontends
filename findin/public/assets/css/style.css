@@ -5637,3 +5637,101 @@ h3.title {
       z-index: 99;
   
 }
+
+
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  padding: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  z-index: 10;
+}
+
+.custom-arrow-next {
+  right: -15px;
+}
+
+.custom-arrow-prev {
+  left: -15px;
+}
+
+@media (min-width: 768px) {
+  .custom-arrow {
+    display: none;
+    /* Hide on desktop */
+  }
+}
+
+
+ .fe-title{
+   font-size: 15px;
+   line-height: 1.5rem;
+   text-transform: capitalize;
+ }
+
+ .listing-grid-item-two .listing-content {
+ 
+   padding: 20px 15px 25px !important;
+ }
+
+ .view-more {
+   
+padding: 4px 7px 4px 7px;
+   width: 100px !important;
+   
+ }
+
+ .li-icon {
+   /* background-color: #7c7878 !important; */
+  
+   height: 30px !important;
+   line-height: 30px !important;
+  
+   width: 30px !important;
+   
+ }
+
+ @media (max-width: 768px) {
+   .pp-0 {
+        padding-left: 0px;
+          padding-right: 0px;
+        
+   }
+ }
+
+
+    .image-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      /* for responsiveness */
+    }
+  
+    .image-container {
+      position: relative;
+      width: 23%;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+  
+    .image-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  
+    .overlay-text {
+      position: absolute;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.6);
+      color: #fff;
+      width: 100%;
+      text-align: center;
+      padding: 10px 0;
+      font-weight: bold;
+    }

@@ -2,67 +2,7 @@ const ListingDetailsRight = () => {
   return (
     <div className="col-lg-4">
       <div className="sidebar-widget-area">
-        <div className="widget reservation-form-widget mb-30 wow fadeInUp">
-          <h4 className="widget-title">Reservation</h4>
-          <form onSubmit={(e) => e.preventDefault()}>
-            <div className="form_group">
-              <input
-                type="text"
-                className="form_control"
-                placeholder="Name"
-                name="name"
-                required=""
-              />
-              <i className="ti-user" />
-            </div>
-            <div className="form_group">
-              <input
-                type="text"
-                className="form_control"
-                placeholder="Phone"
-                name="phone"
-                required=""
-              />
-              <i className="ti-mobile" />
-            </div>
-            <div className="form_group">
-              <select defaultValue={1} className="wide">
-                <option disabled selected>
-                  Guest
-                </option>
-                <option data-display={1}>Guest 01</option>
-                <option data-display={2}>Guest 02</option>
-                <option data-display={2}>Guest 02</option>
-                <option data-display={2}>Guest 02</option>
-              </select>
-            </div>
-            <div className="form_group">
-              <select defaultValue={1}>
-                <option disabled selected>
-                  Date
-                </option>
-                <option data-display={1}>01.11.2021</option>
-                <option data-display={2}>01.11.2021</option>
-                <option data-display={3}>01.11.2021</option>
-                <option data-display={4}>01.11.2021</option>
-              </select>
-            </div>
-            <div className="form_group">
-              <select defaultValue={1} className="wide">
-                <option disabled selected>
-                  Time
-                </option>
-                <option data-display={1}>08.00AM-10.00AM</option>
-                <option data-display={2}>11.00AM-12.00PM</option>
-                <option data-display={3}>01.00PM-02.00PM</option>
-                <option data-display={4}>02.00PM-03.00PM</option>
-              </select>
-            </div>
-            <div className="form_group">
-              <button className="main-btn icon-btn">Book Now</button>
-            </div>
-          </form>
-        </div>
+       
         <div className="widget contact-info-widget mb-30 wow fadeInUp">
           <div className="contact-info-widget-wrap">
             <div className="contact-map">

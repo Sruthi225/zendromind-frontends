@@ -6,7 +6,9 @@ import { GallerySlider2, reletedListingSlider2 } from "@/src/sliderProps";
 import Link from "next/link";
 import { useState } from "react";
 import Slider from "react-slick";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 const ListingDetails2 = () => {
   const [video, setVideo] = useState(false);
   return (
@@ -30,7 +32,7 @@ const ListingDetails2 = () => {
                   <div className="row align-items-center">
                     <div className="col-md-8">
                       <div className="listing-info-content">
-                        <ul className="ratings ratings-three">
+                        {/* <ul className="ratings ratings-three">
                           <li className="star">
                             <i className="flaticon-star-1" />
                           </li>
@@ -51,7 +53,7 @@ const ListingDetails2 = () => {
                               <a href="#">(02 Reviews)</a>
                             </span>
                           </li>
-                        </ul>
+                        </ul> */}
                         <h3 className="title">Center Museum</h3>
                         <div className="listing-meta">
                           <ul>
@@ -76,7 +78,7 @@ const ListingDetails2 = () => {
                     <div className="col-md-4">
                       <div className="button">
                         <Link className="icon-btn" href="/listing-grid">
-                          <i className="ti-heart" />
+                          <FontAwesomeIcon icon={faWhatsapp} />
                         </Link>
                         <Link className="icon-btn" href="/listing-grid">
                           <i className="ti-share" />
@@ -239,233 +241,11 @@ const ListingDetails2 = () => {
                   <a href="#">Shopping</a>
                   <a href="#">Car Parking</a>
                 </div>
-                <div className="listing-rating-box wow fadeInUp">
-                  <h4 className="title">Average Review (10 Reviews)</h4>
-                  <div className="row">
-                    <div className="col-lg-6">
-                      <div className="single-average-rating">
-                        <h5 className="title">Service</h5>
-                        <div className="single-average-wrap d-flex align-items-center">
-                          <div className="progress flex-grow-1">
-                            <div
-                              className="progress-bar"
-                              style={{ width: "80%" }}
-                            />
-                          </div>
-                          <span className="rating">4.5</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-lg-6">
-                      <div className="single-average-rating">
-                        <h5 className="title">Quality</h5>
-                        <div className="single-average-wrap d-flex align-items-center">
-                          <div className="progress flex-grow-1">
-                            <div
-                              className="progress-bar"
-                              style={{ width: "80%" }}
-                            />
-                          </div>
-                          <span className="rating">4.5</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-lg-6">
-                      <div className="single-average-rating">
-                        <h5 className="title">Location</h5>
-                        <div className="single-average-wrap d-flex align-items-center">
-                          <div className="progress flex-grow-1">
-                            <div
-                              className="progress-bar"
-                              style={{ width: "80%" }}
-                            />
-                          </div>
-                          <span className="rating">4.5</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-lg-6">
-                      <div className="single-average-rating">
-                        <h5 className="title">Price</h5>
-                        <div className="single-average-wrap d-flex align-items-center">
-                          <div className="progress flex-grow-1">
-                            <div
-                              className="progress-bar"
-                              style={{ width: "80%" }}
-                            />
-                          </div>
-                          <span className="rating">4.5</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="listing-review-box mb-50 wow fadeInUp">
-                  <h4 className="title">Customer Review</h4>
-                  <ul className="review-list">
-                    <li className="review">
-                      <div className="thumb">
-                        <img
-                          src="assets/images/listing/review-1.jpg"
-                          alt="review image"
-                        />
-                      </div>
-                      <div className="review-content">
-                        <h5>Moriana Steve</h5>
-                        <span className="date">Sep 02, 2021</span>
-                        <p>
-                          Musutrum orci montes hac at neque mollis taciti
-                          parturient vehicula interdum verra cubilia ipsum duis
-                          amet nullam sit ut ornare mattis urna.{" "}
-                        </p>
-                        <div className="content-meta d-flex align-items-center justify-content-between">
-                          <ul className="ratings ratings-three">
-                            <li>
-                              <span className="av-rate">4.5</span>
-                            </li>
-                            <li className="star">
-                              <i className="flaticon-star-1" />
-                            </li>
-                            <li className="star">
-                              <i className="flaticon-star-1" />
-                            </li>
-                            <li className="star">
-                              <i className="flaticon-star-1" />
-                            </li>
-                            <li className="star">
-                              <i className="flaticon-star-1" />
-                            </li>
-                            <li className="star">
-                              <i className="flaticon-star-1" />
-                            </li>
-                          </ul>
-                          <a href="#" className="reply">
-                            <i className="ti-share-alt" />
-                            Reply
-                          </a>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="review">
-                      <div className="thumb">
-                        <img
-                          src="assets/images/listing/review-2.jpg"
-                          alt="review image"
-                        />
-                      </div>
-                      <div className="review-content">
-                        <h5>Moriana Steve</h5>
-                        <span className="date">Sep 02, 2021</span>
-                        <p>
-                          Musutrum orci montes hac at neque mollis taciti
-                          parturient vehicula interdum verra cubilia ipsum duis
-                          amet nullam sit ut ornare mattis urna.{" "}
-                        </p>
-                        <div className="content-meta d-flex align-items-center justify-content-between">
-                          <ul className="ratings ratings-three">
-                            <li>
-                              <span className="av-rate">4.5</span>
-                            </li>
-                            <li className="star">
-                              <i className="flaticon-star-1" />
-                            </li>
-                            <li className="star">
-                              <i className="flaticon-star-1" />
-                            </li>
-                            <li className="star">
-                              <i className="flaticon-star-1" />
-                            </li>
-                            <li className="star">
-                              <i className="flaticon-star-1" />
-                            </li>
-                            <li className="star">
-                              <i className="flaticon-star-1" />
-                            </li>
-                          </ul>
-                          <a href="#" className="reply">
-                            <i className="ti-share-alt" />
-                            Reply
-                          </a>
-                        </div>
-                      </div>
-                    </li>
-                    <li className="review">
-                      <div className="thumb">
-                        <img
-                          src="assets/images/listing/review-3.jpg"
-                          alt="review image"
-                        />
-                      </div>
-                      <div className="review-content">
-                        <h5>Moriana Steve</h5>
-                        <span className="date">Sep 02, 2021</span>
-                        <p>
-                          Musutrum orci montes hac at neque mollis taciti
-                          parturient vehicula interdum verra cubilia ipsum duis
-                          amet nullam sit ut ornare mattis urna.{" "}
-                        </p>
-                        <div className="content-meta d-flex align-items-center justify-content-between">
-                          <ul className="ratings ratings-three">
-                            <li>
-                              <span className="av-rate">4.5</span>
-                            </li>
-                            <li className="star">
-                              <i className="flaticon-star-1" />
-                            </li>
-                            <li className="star">
-                              <i className="flaticon-star-1" />
-                            </li>
-                            <li className="star">
-                              <i className="flaticon-star-1" />
-                            </li>
-                            <li className="star">
-                              <i className="flaticon-star-1" />
-                            </li>
-                            <li className="star">
-                              <i className="flaticon-star-1" />
-                            </li>
-                          </ul>
-                          <a href="#" className="reply">
-                            <i className="ti-share-alt" />
-                            Reply
-                          </a>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
+                
+                
                 <div className="listing-review-form mb-30 wow fadeInUp">
-                  <div className="row">
-                    <div className="col-md-6">
-                      <h4 className="title">Write a Review</h4>
-                    </div>
-                    <div className="col-md-6">
-                      <div className="form-rating">
-                        <ul className="ratings">
-                          <li>
-                            <span>Rate Here:</span>
-                          </li>
-                          <li className="star">
-                            <i className="flaticon-star-1" />
-                          </li>
-                          <li className="star">
-                            <i className="flaticon-star-1" />
-                          </li>
-                          <li className="star">
-                            <i className="flaticon-star-1" />
-                          </li>
-                          <li className="star">
-                            <i className="flaticon-star-1" />
-                          </li>
-                          <li className="star">
-                            <i className="flaticon-star-1" />
-                          </li>
-                        </ul>
-                        <span>(02 Reviews)</span>
-                      </div>
-                    </div>
-                  </div>
-                  <form onSubmit={(e) => e.preventDefault()}>
+                  
+                  {/* <form onSubmit={(e) => e.preventDefault()}>
                     <div className="row">
                       <div className="col-lg-12">
                         <div className="form_group">
@@ -523,7 +303,7 @@ const ListingDetails2 = () => {
                         </div>
                       </div>
                     </div>
-                  </form>
+                  </form> */}
                 </div>
               </div>
               <div className="releted-listing-area wow fadeInUp">
