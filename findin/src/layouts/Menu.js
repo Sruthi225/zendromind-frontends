@@ -46,7 +46,7 @@ export const Pages = () => (
       <Link href="/add-listing">Add Listing</Link>
     </li>
     <li>
-      <Link href="/products">Our Products</Link>
+      <Link href="/city">Our City</Link>
     </li>
     <li>
       <Link href="/product-details">Products Details</Link>
