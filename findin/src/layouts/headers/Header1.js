@@ -9,52 +9,43 @@ const Header1 = () => {
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-4">
-              <div className="top-social">
-                <ul className="social-link">
-                  <li>
-                    <span>Follow us:</span>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i className="ti-facebook"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i className="ti-instagram"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i className="ti-youtube"></i>
-                    </a>
-                  </li>
-                 
-                  
-                </ul>
-              </div>
+              
             </div>
             <div className="col-md-4">
               <div className="top-content text-center">
-                <p>
+                {/* <p>
                   Special offers and events{" "}
                   <Link href="/">Find it</Link>
-                </p>
+                </p> */}
               </div>
             </div>
             <div className="col-md-4">
               <div className="top-right">
-                <ul className="d-flex">
-                  
-                  
-                  <li>
-                    <Link href="/">
-                      <i className="ti-user"></i>
-                      <span>Join Our Team</span>
-                    </Link>
-                  </li>
-                 
-                </ul>
+                <div className="top-social">
+                  <ul className="social-link">
+                    <li>
+                      <span>Follow us:</span>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i className="ti-facebook"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i className="ti-instagram"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i className="ti-youtube"></i>
+                      </a>
+                    </li>
+
+
+                  </ul>
+                </div>
+
               </div>
             </div>
           </div>
@@ -78,20 +69,21 @@ const Header1 = () => {
                   </div>
                   <nav className="main-menu">
                     <ul>
-                      <li className="menu-item has-children">
+                      {/* <li className="menu-item has-children">
                         <Link href="/">Home</Link>
-                        <ul className="sub-menu">
+                        <ul className="sub-menu"> */}
                           <Home />
-                        </ul>
-                      </li>
+                        {/* </ul>
+                      </li> */}
                       <About />
+                      <Blog />
                       <li className="menu-item has-children">
-                        <a href="#">Listings</a>
+                        <a href="#">Events</a>
                         <ul className="sub-menu">
                           <Listing />
                         </ul>
                       </li>
-                      <li className="menu-item has-children">
+                      {/* <li className="menu-item has-children">
                         <a href="#">Pages</a>
                         <ul className="sub-menu">
                           <Pages />
@@ -102,7 +94,7 @@ const Header1 = () => {
                         <ul className="sub-menu">
                           <Blog />
                         </ul>
-                      </li>
+                      </li> */}
                       <Contact />
                       <li className="nav-btn">
                         <Link className="main-btn icon-btn" href="/add-listing">

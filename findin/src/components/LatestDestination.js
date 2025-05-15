@@ -33,7 +33,7 @@ const sliderSettings = {
   dots: true,
   infinite: true,
   speed: 500,
-  slidesToShow: 3,
+  slidesToShow: 4,
   slidesToScroll: 1,
   arrows: true,
   nextArrow:
@@ -75,7 +75,7 @@ const LatestDestination = () => {
 
   const [loading, setLoading] = useState(true);
   const [Item, setItem] = useState([]);
-   // Prevents errors before component loads
+  // Prevents errors before component loads
 
   const fetchItem = async () => {
     // if (!formData.N_T_M_Category_ID) return; // Prevent API call if no category is selected
@@ -89,7 +89,7 @@ const LatestDestination = () => {
           ? response.data.info[0].Items
           : [];
 
-        data = [...data].sort(() => Math.random() - 0.5);
+      data = [...data].sort(() => Math.random() - 0.5);
       setItem(data);
     } catch (error) {
       console.error("Error fetching locations:", error);
@@ -108,14 +108,14 @@ const LatestDestination = () => {
     <section className="listing-grid-area">
       <div className="container">
         <Slider {...sliderSettings} className="listing-slider-one wow fadeInDown">
-        {Item.length > 0
+          {Item.length > 0
             ? Item.map((item, index) => (
-            <div key={item.index} className="listing-item listing-grid-item-two">
-              <div className="listing-thumbnail">
-                <img src={item.V_ItemDigitalFile} alt="Listing Image" />
-                <div className="cat-name">{item.V_CategoryName}</div>
-                {item.B_Featured && <span className="featured-btn">Featured</span>}
-                {/* <ul className="ratings">
+              <div key={item.index} className="listing-item listing-grid-item-two">
+                <div className="listing-thumbnail">
+                  <img src={item.V_ItemDigitalFile} alt="Listing Image" />
+                  <div className="cat-name">{item.V_CategoryName}</div>
+                  {item.B_Featured && <span className="featured-btn">Featured</span>}
+                  {/* <ul className="ratings">
                   {Array.from({ length: 5 }).map((_, index) => (
                     <li className="star" key={index}>
                       <i className="flaticon-star-1"></i>
@@ -127,56 +127,56 @@ const LatestDestination = () => {
                     </span>
                   </li>
                 </ul> */}
-              </div>
-              <div className="listing-content">
-                <div className="li-padding">
-                  <h3 className="title">
-                    <Link href="/listing-details-1">{item.V_ItemName}</Link>
-                  </h3>
-                  <p>
-                    <i className="ti-location-pin"></i> {item.V_LocationName}
-                  </p>
-                  <span className="phone-meta">
-                  {item.V_PhoneNumber && (
-                    <>
-                     <i className="ti-tablet"></i>
-                     <a href={`tel:${item.V_PhoneNumber}`}>{item.V_PhoneNumber}</a>
-                    </>
-                   
-                  )}
-                  </span>
+                </div>
+                <div className="listing-content">
+                  <div className="li-padding">
+                    <h3 className="title">
+                      <Link href="/listing-details-1">{item.V_ItemName}</Link>
+                    </h3>
+                    <p>
+                      <i className="ti-location-pin"></i> {item.V_LocationName}
+                    </p>
+                    <span className="phone-meta">
+                      {item.V_PhoneNumber && (
+                        <>
+                          <i className="ti-tablet"></i>
+                          <a href={`tel:${item.V_PhoneNumber}`}>{item.V_PhoneNumber}</a>
+                        </>
 
-                  {/* Contact & Links */}
-                  <div className="listing-meta list-meta2 d-flex justify-content-between align-items-center">
-                    <a href={item.viewMoreLink}>
-                      <div className="view-more">View More</div>
-                    </a>
-                    <div className="icons d-flex align-items-center">
-                      {/* WhatsApp */}
-                      {item.V_WhatsappLink && (
-                        <a className="li-icon" href={`https://wa.me/${item.V_WhatsappLink}`} target="_blank"
-                          rel="noopener noreferrer">
-                          <FontAwesomeIcon icon={faWhatsapp} />
-                        </a>
                       )}
-                      {/* Website */}
-                      {item.V_WebSiteLink && (
-                        <a className="li-icon" href={item.V_WebSiteLink} target="_blank" rel="noopener noreferrer">
-                          <i className="ti-world"></i>
-                        </a>
-                      )}
-                      {/* Google Maps Location */}
-                      {item.V_GoogleMapLink && (
-                        <a className="li-icon" href={item.V_GoogleMapLink} target="_blank" rel="noopener noreferrer">
-                          <i className="ti-location-pin"></i>
-                        </a>
-                      )}
+                    </span>
+
+                    {/* Contact & Links */}
+                    <div className="listing-meta list-meta2 d-flex justify-content-between align-items-center">
+                      <a href={item.viewMoreLink}>
+                        <div className="view-more">View More</div>
+                      </a>
+                      <div className="icons d-flex align-items-center">
+                        {/* WhatsApp */}
+                        {item.V_WhatsappLink && (
+                          <a className="li-icon" href={`https://wa.me/${item.V_WhatsappLink}`} target="_blank"
+                            rel="noopener noreferrer">
+                            <FontAwesomeIcon icon={faWhatsapp} />
+                          </a>
+                        )}
+                        {/* Website */}
+                        {item.V_WebSiteLink && (
+                          <a className="li-icon" href={item.V_WebSiteLink} target="_blank" rel="noopener noreferrer">
+                            <i className="ti-world"></i>
+                          </a>
+                        )}
+                        {/* Google Maps Location */}
+                        {item.V_GoogleMapLink && (
+                          <a className="li-icon" href={item.V_GoogleMapLink} target="_blank" rel="noopener noreferrer">
+                            <i className="ti-location-pin"></i>
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )): "No Items Available..."}
+            )) : "No Items Available..."}
         </Slider>
       </div>
     </section>

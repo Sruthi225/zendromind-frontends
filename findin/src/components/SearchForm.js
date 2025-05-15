@@ -90,10 +90,7 @@ const fetchLocations = async (categoryId = 0) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // navigate(`/_not-found/page?category=${formData.category}&location=${formData.location}&keyword=${formData.keyword}`);
-
   };
-
 
   const categoryOptions = categories.map(cat => ({
     value: cat.N_T_M_Category_ID,

@@ -1,6 +1,7 @@
 "use client";
 import Layout from "@/src/layouts/Layout";
 import ItemListing from "@/src/components/ItemListing";
+import LatestDestination from "@/src/components/LatestDestination_old1";
 import SearchForm from "@/src/components/SearchForm";
 import { useSearchParams } from 'next/navigation';
 
@@ -50,6 +51,7 @@ const Listing = () => {
             
           <div style={{ width: "100%", maxWidth: "1200px", margin: "auto" }}>
             <ItemListing category={category} location={location} keyword={keyword}/>
+            {/* <LatestDestination category={category} location={location} keyword={keyword}/> */}
           </div>
         </div>
       </section>

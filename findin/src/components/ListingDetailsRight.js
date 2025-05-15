@@ -1,97 +1,99 @@
+
+"use client";
+import Link from "next/link";
+import { useState, useEffect } from "react";
+import axios from 'axios';
+import config from "./common.service";
+
 const ListingDetailsRight = () => {
+  const [loading, setLoading] = useState(true);
+    const [Item, setItem] = useState([]);
+    const [ItemBusinessHour, setItemBusinessHour] = useState([]);
+  
+    const fetchItemDetails = async () => {
+  
+      try {
+        const response = await axios.get(
+          `${config.bmrServerURL}/api/user/get/item_details/1`
+        );
+        let data =
+          response.data.info && response.data.info.length > 0
+            ? response.data.info
+            : [];
+        setItem(data);
+      } catch (error) {
+        console.error("Error fetching locations:", error);
+      }
+      finally {
+        setLoading(false);
+      }
+    };
+
+    const fetchBusinessHour = async () => {
+  
+      try {
+        const response = await axios.get(
+          `${config.bmrServerURL}/api/user/get/item_businesshours/1`
+        );
+        let data =
+          response.data.info && response.data.info.length > 0
+            ? response.data.info
+            : [];
+        setItemBusinessHour(data);
+      } catch (error) {
+        console.error("Error fetching Business Hour:", error);
+      }
+      finally {
+        setLoading(false);
+      }
+    };
+  
+    useEffect(() => {
+      fetchItemDetails();
+      fetchBusinessHour();
+    }, []);
+    if (loading) return <p>Loading Items...</p>;
   return (
     <div className="col-lg-4">
       <div className="sidebar-widget-area">
-        <div className="widget reservation-form-widget mb-30 wow fadeInUp">
-          <h4 className="widget-title">Reservation</h4>
-          <form onSubmit={(e) => e.preventDefault()}>
-            <div className="form_group">
-              <input
-                type="text"
-                className="form_control"
-                placeholder="Name"
-                name="name"
-                required=""
-              />
-              <i className="ti-user" />
-            </div>
-            <div className="form_group">
-              <input
-                type="text"
-                className="form_control"
-                placeholder="Phone"
-                name="phone"
-                required=""
-              />
-              <i className="ti-mobile" />
-            </div>
-            <div className="form_group">
-              <select defaultValue={1} className="wide">
-                <option disabled selected>
-                  Guest
-                </option>
-                <option data-display={1}>Guest 01</option>
-                <option data-display={2}>Guest 02</option>
-                <option data-display={2}>Guest 02</option>
-                <option data-display={2}>Guest 02</option>
-              </select>
-            </div>
-            <div className="form_group">
-              <select defaultValue={1}>
-                <option disabled selected>
-                  Date
-                </option>
-                <option data-display={1}>01.11.2021</option>
-                <option data-display={2}>01.11.2021</option>
-                <option data-display={3}>01.11.2021</option>
-                <option data-display={4}>01.11.2021</option>
-              </select>
-            </div>
-            <div className="form_group">
-              <select defaultValue={1} className="wide">
-                <option disabled selected>
-                  Time
-                </option>
-                <option data-display={1}>08.00AM-10.00AM</option>
-                <option data-display={2}>11.00AM-12.00PM</option>
-                <option data-display={3}>01.00PM-02.00PM</option>
-                <option data-display={4}>02.00PM-03.00PM</option>
-              </select>
-            </div>
-            <div className="form_group">
-              <button className="main-btn icon-btn">Book Now</button>
-            </div>
-          </form>
-        </div>
+      {Item.length>0 && (
         <div className="widget contact-info-widget mb-30 wow fadeInUp">
           <div className="contact-info-widget-wrap">
+          
             <div className="contact-map">
-              <iframe src="https://maps.google.com/maps?q=new%20york&t=&z=13&ie=UTF8&iwloc=&output=embed" />
-              <a href="#" className="support-icon">
-                <i className="flaticon-headphone" />
-              </a>
-            </div>
-            <div className="contact-info-content">
+            <iframe src={Item[0].V_GoogleMapLink} />
+            <a href="#" className="support-icon">
+              <i className="flaticon-headphone" />
+            </a>
+          </div>
+              <div className="contact-info-content">
               <h4 className="widget-title">Contact Info</h4>
               <div className="info-list">
-                <p>
-                  <i className="ti-tablet" />
-                  <a href="tel:+98265365205">+98 (265) 3652 - 05</a>
-                </p>
+                {Item[0].V_PhoneNumber>0 && (
+                  <p>
+                    <i className="ti-tablet" />
+                    <a href="tel:+98265365205">{Item[0].V_PhoneNumber}</a>
+                  </p>
+                )}
                 <p>
                   <i className="ti-location-pin" />
-                  45/A Natura, Barcelona, Spain
+                  {Item[0].V_ItemAddress}
                 </p>
-                <p>
-                  <i className="ti-email" />
-                  <a href="mailto:contact@example.com">contact@example.com</a>
-                </p>
-                <p>
-                  <i className="ti-world" />
-                  <a href="www.fioxen.com">www.fioxen.com</a>
-                </p>
-              </div>
-              <ul className="social-link">
+                {Item[0].V_Gmail && (
+                  <p>
+                    <i className="ti-email" />
+                    <a href="mailto:contact@example.com"></a>
+                  </p>
+                )}
+                {Item[0].V_WebSiteLink && (
+                  <p>
+                    <i className="ti-world" />
+                    <a href="www.fioxen.com">{Item[0].V_WebSiteLink}</a>
+                  </p>
+                
+                )} 
+              
+              {/* <ul className="social-link">
                 <li>
                   <a href="#">
                     <i className="ti-facebook" />
@@ -112,43 +114,27 @@ const ListingDetailsRight = () => {
                     <i className="ti-dribbble" />
                   </a>
                 </li>
-              </ul>
+              </ul> */}
+             </div>
             </div>
+
+            
           </div>
         </div>
-        <div className="widget business-hour-widget mb-30 wow fadeInUp">
-          <h4 className="widget-title">Business Hour</h4>
-          <ul className="time-info">
-            <li>
-              <span className="day">Monday</span>
-              <span className="time">08:00 - 21:00</span>
-            </li>
-            <li>
-              <span className="day">Tuesday</span>
-              <span className="time">08:00 - 21:00</span>
-            </li>
-            <li>
-              <span className="day">Wednesday</span>
-              <span className="time">08:00 - 21:00</span>
-            </li>
-            <li>
-              <span className="day">Thursday</span>
-              <span className="time">08:00 - 21:00</span>
-            </li>
-            <li>
-              <span className="day">Friday</span>
-              <span className="time">08:00 - 21:00</span>
-            </li>
-            <li>
-              <span className="day">Saturday</span>
-              <span className="time">08:00 - 21:00</span>
-            </li>
-            <li>
-              <span className="day">Sunday</span>
-              <span className="time st-close">Close</span>
-            </li>
-          </ul>
-        </div>
+        )}
+        {ItemBusinessHour.length>0 && ItemBusinessHour[0].B_WorkingDays === 1 &&(
+          <div  className="widget business-hour-widget mb-30 wow fadeInUp">
+            <h4 className="widget-title">Business Hour</h4>
+            <ul  className="time-info">
+              {ItemBusinessHour.map((item, index) =>  (
+                <li key = {item.index}>
+                  <span className="day">{item.V_WeekDays}</span>
+                  <span  className={`time ${item.Working !== 1 ? 'st-close' : ''}`}>{item.Working === 1 ?(item.D_FromTime + '-' +item.D_ToTime): 'Close'}</span>
+                </li>
+               ))}
+            </ul>
+          </div>
+        )}
         <div className="widget newsletter-widget mb-30 wow fadeInUp">
           <div
             className="newsletter-widget-wrap bg_cover"
