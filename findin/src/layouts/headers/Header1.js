@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { About, Blog, Contact, Home, Listing, Pages } from "../Menu";
+import { Categories, Blog, Contact, Home, Listing, Pages } from "../Menu";
 
 const Header1 = () => {
   return (
@@ -55,15 +55,15 @@ const Header1 = () => {
         <div className="container-fluid">
           <div className="primary-menu">
             <div className="row">
-              <div className="col-lg-2 col-5">
+              <div className="col-lg-3 col-5">
                 <div className="site-branding">
                   <Link className="brand-logo" href="/">
-                    <img src="assets/images/logo/logo-1.png" alt="Brand Logo" />
+                    <img className="logo-wi" src="assets/img/fit.png" alt="Brand Logo" />
                   </Link>
                 </div>
               </div>
               <div className="col-lg-6 col-2">
-                <div className="nav-menu">
+                <div className="nav-menu justify-content-end">
                   <div className="navbar-close">
                     <i className="ti-close"></i>
                   </div>
@@ -75,7 +75,16 @@ const Header1 = () => {
                           <Home />
                         {/* </ul>
                       </li> */}
-                      <About />
+                      <li className="menu-item has-children">
+                        <a href="#">categories</a>
+                        <ul className="sub-menu">
+                          <Categories />
+                        </ul>
+                      </li>
+
+
+
+                      {/* <Categories /> */}
                       <Blog />
                       <li className="menu-item has-children">
                         <a href="#">Events</a>
@@ -105,17 +114,17 @@ const Header1 = () => {
                   </nav>
                 </div>
               </div>
-              <div className="col-lg-4 col-5">
+              <div className="col-lg-3 col-5">
                 <div className="header-right-nav">
                   <ul className="d-flex align-items-center">
-                    <li className="user-btn">
+                    {/* <li className="user-btn">
                       <Link className="icon" href="/">
                         <i className="flaticon-avatar"></i>
                       </Link>
-                    </li>
+                    </li> */}
                     <li className="hero-nav-btn">
                       <Link className="main-btn icon-btn" href="/add-listing">
-                        Add Listing
+                        List with Us
                       </Link>
                     </li>
                     <li className="nav-toggle-btn">

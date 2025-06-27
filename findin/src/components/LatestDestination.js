@@ -6,6 +6,8 @@ import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import axios from 'axios';
 import config from "./common.service";
+// import { faPhone } from '@fortawesome/free-solid-svg-icons';
+
 
 
 
@@ -112,7 +114,7 @@ const LatestDestination = () => {
             ? Item.map((item, index) => (
               <div key={item.index} className="listing-item listing-grid-item-two">
                 <div className="listing-thumbnail">
-                  <img src={item.V_ItemDigitalFile} alt="Listing Image" />
+                  <img className="h-250" src={item.V_ItemDigitalFile} alt="Listing Image" />
                   <div className="cat-name">{item.V_CategoryName}</div>
                   {item.B_Featured && <span className="featured-btn">Featured</span>}
                   {/* <ul className="ratings">
@@ -139,7 +141,7 @@ const LatestDestination = () => {
                     <span className="phone-meta">
                       {item.V_PhoneNumber && (
                         <>
-                          <i className="ti-tablet"></i>
+                          {/* <FontAwesomeIcon icon={faPhone} /> */}
                           <a href={`tel:${item.V_PhoneNumber}`}>{item.V_PhoneNumber}</a>
                         </>
 

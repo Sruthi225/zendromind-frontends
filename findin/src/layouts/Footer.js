@@ -67,34 +67,28 @@ const Footer = () => {
               </div>
               <div className="col-lg-3 col-md-6 col-sm-12">
                 <div
-                  className="widget recent-post-widget mb-40 wow fadeInUp"
+                  className="widget categories-widget mb-40 wow fadeInUp"
                   data-wow-delay="20ms"
                 >
-                  <h4 className="widget-title">Recent News</h4>
-                  <ul className="post-widget-list">
-                    <li className="post-content-item">
-                      <div className="post-title-date">
-                        <span className="posted-on">
-                          <a href="#">22 August - 2021</a>
-                        </span>
-                        <h6 className="title">
-                          <Link href="/blog-details">
-                            Facilisis a ultricies quis dictumst fredom...
-                          </Link>
-                        </h6>
-                      </div>
+                  <h4 className="widget-title">Categories</h4>
+                  <ul className="categories-link">
+                    <li>
+                      <a href="#">Restaurant</a>
                     </li>
-                    <li className="post-content-item">
-                      <div className="post-title-date">
-                        <span className="posted-on">
-                          <a href="#">22 August - 2021</a>
-                        </span>
-                        <h6 className="title">
-                          <Link href="/blog-details">
-                            Facilisis a ultricies quis dictumst fredom...
-                          </Link>
-                        </h6>
-                      </div>
+                    <li>
+                      <a href="#">Museum</a>
+                    </li>
+                    <li>
+                      <a href="#">Party Center</a>
+                    </li>
+                    <li>
+                      <a href="#">Game Field</a>
+                    </li>
+                    <li>
+                      <a href="#">Shopping</a>
+                    </li>
+                    <li>
+                      <a href="#">Art & Gallery</a>
                     </li>
                   </ul>
                 </div>

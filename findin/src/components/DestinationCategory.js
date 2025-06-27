@@ -35,7 +35,7 @@ const ListingSliderOne = {
   dots: true,
   infinite: true,
   speed: 500,
-  slidesToShow: 4,
+  slidesToShow: 5,
   slidesToScroll: 1,
   arrows: true,
   nextArrow: <SampleNextArrow />,
@@ -43,7 +43,7 @@ const ListingSliderOne = {
   responsive: [
     { breakpoint: 1024, settings: { slidesToShow: 3 } },
     { breakpoint: 768, settings: { slidesToShow: 2 } },
-    { breakpoint: 480, settings: { slidesToShow: 1 } },
+    { breakpoint: 480, settings: { slidesToShow: 2 } },
   ],
 };
 
@@ -96,17 +96,17 @@ const DestinationCategory = () => {
                     />
                     <div className="category-overlay">
                       <div className="category-content">
-                        <Link href="/index-2">
-                          <i className="ti-link" />
+                        <Link href="">
+                          {/* <i className="ti-link" /> */}
                         </Link>
                       </div>
                     </div>
                   </div>
                   <div className="info">
-                    <div className="icon">
+                    {/* <div className="icon">
                       <Image src={iconUrl} alt="icon" width={30} height={30} unoptimized />
-                    </div>
-                    <h3 className="title">
+                    </div> */}
+                    <h3 className="title mt-10">
                       <a href="#">{category.V_CategoryName}</a>
                     </h3>
                     <span className="listing">{category.Listing} Listings</span>

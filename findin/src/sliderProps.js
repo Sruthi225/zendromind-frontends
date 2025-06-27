@@ -141,10 +141,10 @@ export const ListingSlider2 = {
 };
 export const GallerySlider2 = {
   dots: false,
-  arrows: false,
+  arrows: true,
   autoplaySpeed: 1500,
   autoplay: true,
-  slidesToShow: 4,
+  slidesToShow: 1,
   slidesToScroll: 1,
 };
 export const reletedListingSlider2 = {

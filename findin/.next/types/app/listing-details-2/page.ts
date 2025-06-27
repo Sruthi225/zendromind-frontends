@@ -1,4 +1,4 @@
-// File: C:\Users\divya\Desktop\zendromind-frontends\findin\app\listing-details-2\page.js
+// File: C:\zentrominds\pepperbus\zendromind-frontends\findin\app\listing-details-2\page.js
 import * as entry from '../../../../app/listing-details-2/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

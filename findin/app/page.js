@@ -33,7 +33,7 @@ const Index = () => {
               <div className="col-lg-12">
                 <div className="hero-content">
                   <h1 className="wow fadeInUp" data-wow-delay="30ms">
-                    Experience The Wonder
+                    Search and Find <br/>around Us
                   </h1>
                   <h3 className="wow fadeInDown" data-wow-delay="50ms">
                     People Don’t Take,Trips Take People
@@ -58,13 +58,13 @@ const Index = () => {
 
 
       {/*====== Start Latest Destination Section ======*/}
-      <section className="category-area pt-110 pb-30">
+      <section className="category-area pt-80 pb-60">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-6">
               <div className="section-title section-title-two text-center  wow fadeInUp">
                 <h2>
-                  <span className="line">Listed</span> Business
+                  <span className="line">Featured</span> Listing
                 </h2>
               </div>
             </div>
@@ -82,11 +82,11 @@ const Index = () => {
 
 
 {/*====== Start category Section ======*/}
-<section className="category-area pt-110 pb-30">
+      <section className="category-area bg-cat pt-80 pb-80">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-6">
-              <div className="section-title section-title-two text-center mb-60 wow fadeInUp">
+              <div className="section-title section-title-two text-center mb-30 wow fadeInUp">
                 <h2>
                   <span className="line">Prime</span> Categories
                 </h2>
@@ -122,7 +122,7 @@ const Index = () => {
 
 
 {/*====== Start offer Section ======*/}
-<section className="cta-area">
+<section className="cta-area ">
         <div
           className="cta-wrapper-two bg_cover"
           style={{ backgroundImage: "url(assets/images/bg/cta-bg-2.jpg)" }}
@@ -137,9 +137,7 @@ const Index = () => {
                     Pharetra venenatis ante pulvinar fermentum dignissim one
                     malesuada laoreet ridiculus fringilla quam
                   </p>
-                  <Link href="/listing-grid" className="main-btn icon-btn">
-                    Explore Now
-                  </Link>
+                  
                 </div>
 
               </div>
@@ -166,13 +164,13 @@ const Index = () => {
 
 
 {/*====== Start Place Section ======*/}
-<section className="place-area pt-110 pb-90">
+<section className="place-area pt-80 pb-80">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-6">
               <div className="section-title section-title-two text-center mb-55 wow fadeInUp">
                 <h2>
-                  <span className="line">Tourist</span> Destinations
+                  <span className="line">Travel</span> Destinations
                 </h2>
               </div>
             </div>
@@ -451,7 +449,7 @@ const Index = () => {
       {/*====== End Client Section ======*/}
 
              {/* <!--====== Start Blog Section ======--> */}
-      <section className="blog-area pt-115 pb-120">
+      <section className="blog-area pt-80 pb-80">
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-6">
@@ -594,7 +592,7 @@ const Index = () => {
           </div>
           <div className="row">
             <div className="col-lg-12">
-              <div className="button text-center mt-40">
+              <div className="button text-center mt-0">
                 <Link href="/blog" className="main-btn icon-btn">
                   View Blog
                 </Link>
@@ -606,9 +604,9 @@ const Index = () => {
       {/* <!--====== End Blog Section ======--> */}
 
       {/* <!--====== Start Intro Video Section ======--> */}
-      <section className="intro-video">
+      <section className="intro-video ">
         <div
-          className="intro-wrapper-one bg_cover pt-115"
+          className="intro-wrapper-one bg_cover pt-80 pb-80"
           style={{ backgroundImage: `url(assets/images/bg/video-bg-1.jpg)` }}
         >
           <div className="container">

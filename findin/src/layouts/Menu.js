@@ -32,13 +32,56 @@ export const Home = () => (
 
 
 
-export const About = () => (
+// export const Categories = () => (
+//   <Fragment>
+//     <li className="menu-item">
+//       <Link href="/category">Category</Link>
+//     </li>
+//   </Fragment>
+// );
+
+export const Categories = () => (
   <Fragment>
-    <li className="menu-item">
-      <Link href="/category">Category</Link>
+    <li className="menu-item mega-menu">
+      {/* <Link href="/category">Category</Link> */}
+      <div className="mega-menu-content">
+        <div className="mega-menu-column">
+          <h5>Events</h5>
+          <ul>
+            <li><Link href="/events/music">Music Events</Link></li>
+            <li><Link href="/events/sports">Sports Events</Link></li>
+            <li><Link href="/events/festivals">Festivals</Link></li>
+          </ul>
+        </div>
+        <div className="mega-menu-column">
+          <h5>Workshops</h5>
+          <ul>
+            <li><Link href="/workshops/tech">Tech</Link></li>
+            <li><Link href="/workshops/art">Art</Link></li>
+            <li><Link href="/workshops/culinary">Culinary</Link></li>
+          </ul>
+        </div>
+        <div className="mega-menu-column">
+          <h5>Exhibitions</h5>
+          <ul>
+            <li><Link href="/exhibitions/art">Art Shows</Link></li>
+            <li><Link href="/exhibitions/book">Book Fairs</Link></li>
+            <li><Link href="/exhibitions/auto">Auto Expo</Link></li>
+          </ul>
+        </div>
+        <div className="mega-menu-column">
+          <h5>Online</h5>
+          <ul>
+            <li><Link href="/online/webinars">Webinars</Link></li>
+            <li><Link href="/online/conferences">Conferences</Link></li>
+            <li><Link href="/online/courses">Courses</Link></li>
+          </ul>
+        </div>
+      </div>
     </li>
   </Fragment>
 );
+
 export const Blog = () => (
   <Fragment>
     <li className="menu-item">

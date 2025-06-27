@@ -1,6 +1,9 @@
 {
-  "/_not-found/page": "app/_not-found/page.js",
-  "/listing-details-2/page": "app/listing-details-2/page.js",
+  "/page": "app/page.js",
   "/item-listing/page": "app/item-listing/page.js",
-  "/favicon.ico/route": "app/favicon.ico/route.js"
+  "/add-listing/page": "app/add-listing/page.js",
+  "/blog/page": "app/blog/page.js",
+  "/blog-details/page": "app/blog-details/page.js",
+  "/listing-details-2/page": "app/listing-details-2/page.js",
+  "/contact/page": "app/contact/page.js"
 }

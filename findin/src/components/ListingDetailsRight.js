@@ -61,10 +61,10 @@ const ListingDetailsRight = () => {
           <div className="contact-info-widget-wrap">
           
             <div className="contact-map">
-            <iframe src={Item[0].V_GoogleMapLink} />
-            <a href="#" className="support-icon">
+                <iframe className="listing-map" src={Item[0].V_GoogleMapLink} />
+            {/* <a href="#" className="support-icon">
               <i className="flaticon-headphone" />
-            </a>
+            </a> */}
           </div>
               <div className="contact-info-content">
               <h4 className="widget-title">Contact Info</h4>
@@ -122,6 +122,10 @@ const ListingDetailsRight = () => {
           </div>
         </div>
         )}
+
+        <a href="" className="main-btn icon-btn mb-20">
+          View Menu / Brochure
+        </a>
         {ItemBusinessHour.length>0 && ItemBusinessHour[0].B_WorkingDays === 1 &&(
           <div  className="widget business-hour-widget mb-30 wow fadeInUp">
             <h4 className="widget-title">Business Hour</h4>

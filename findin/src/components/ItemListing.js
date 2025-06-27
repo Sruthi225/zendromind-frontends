@@ -47,7 +47,7 @@ return (
       {/* Desktop Grid View */}
       <div className="row d-none d-md-flex">
         {Item.slice(0, 12).map((item, index) => (
-          <div key={index} className="col-lg-3 col-md-6 mb-4">
+          <div key={index} className="col-lg-4 col-md-6 mb-4">
             <Card item={item} />
           </div>
         ))}
@@ -75,7 +75,7 @@ return (
 const Card = ({ item }) => (
 <div className="listing-item listing-grid-item-two">
   <div className="listing-thumbnail">
-    <img src={item.V_ItemDigitalFile} alt="Listing" />
+      <img className="h-250" src={item.V_ItemDigitalFile} alt="Listing" />
     <div className="cat-name">{item.V_CategoryName}</div>
     {item.B_Featured && <span className="featured-btn">Featured</span>}
   </div>

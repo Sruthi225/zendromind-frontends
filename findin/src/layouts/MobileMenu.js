@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { About, Blog, Contact, Home, Listing, Pages } from "./Menu";
+import { Categories, Blog, Contact, Home, Listing, Pages } from "./Menu";
 
 const MobileMenu = () => {
   const [toggle, setToggle] = useState(false);
@@ -100,7 +100,7 @@ const MobileMenu = () => {
                           <i className="ti-arrow-down"></i>
                         </span>
                       </li>
-                      <About />
+                      <Categories />
                       <li className="menu-item has-children">
                         <a href="#">Listings</a>
                         <ul className="sub-menu" style={activeLi("Listings")}>

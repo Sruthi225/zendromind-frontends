@@ -126,7 +126,7 @@ const fetchLocations = async (categoryId = 0) => {
              )}  */}
           
             <Select
-            className="form_control"
+              className="form_control w-114 p-0 t-start h-70"
             name="category"
             options={categoryOptions}
             value={categoryOptions.find(opt => opt.value === formData.category)}
@@ -156,7 +156,7 @@ const fetchLocations = async (categoryId = 0) => {
             </select>
             )} */}
             <Select
-            className="form_control"
+              className="form_control w-114 w-100 p-0 t-start h-70"
             name="location"
             options={locationOptions}
             value={locationOptions.find(opt => opt.value === formData.location)}

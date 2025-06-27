@@ -10,6 +10,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import config from "./common.service";
 
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 const ListingDetails = ({ItemId, CategoryId}) => {
 
@@ -120,38 +122,28 @@ const ListingDetails = ({ItemId, CategoryId}) => {
           backgroundImage:  `url(${Item[0]?.V_ItemDigitalFile || '(assets/images/bg/listing-breadcrumbs-1.jpg)'})`
         }}
       />
-      <section className="listing-details-section pt-120 pb-90">
+      {/* {Item[0]?.V_ItemDigitalFile &&
+        <div className="listing-thumbnail mb-30 wow fadeInUp">
+          <img
+            src={Item[0]?.V_ItemDigitalFile}
+            alt="listing image"
+          />
+        </div>
+      } */}
+
+
+
+      <section className="listing-details-section pt-80 pb-90">
         <div className="container">
           <div className="row">
             <div className="col-lg-8">
               <div className="listing-details-wrapper listing-details-wrapper-two">
                 <div className="listing-info-area mb-30 wow fadeInUp">
-                  <div className="row align-items-center">
+                  <div className="row align-items-start">
                     <div className="col-md-8">
                         {Item.length>0 && (
                             <div className="listing-info-content">
-                            {/* <ul className="ratings ratings-three">
-                              <li className="star">
-                                <i className="flaticon-star-1" />
-                              </li>
-                              <li className="star">
-                                <i className="flaticon-star-1" />
-                              </li>
-                              <li className="star">
-                                <i className="flaticon-star-1" />
-                              </li>
-                              <li className="star">
-                                <i className="flaticon-star-1" />
-                              </li>
-                              <li className="star">
-                                <i className="flaticon-star-1" />
-                              </li>
-                              <li>
-                                <span>
-                                  <a href="#">(02 Reviews)</a>
-                                </span>
-                              </li>
-                            </ul> */}
+                          
                                 <h3 className="title">{Item[0].V_ItemName}</h3>
                             <div className="listing-meta">
                               <ul>
@@ -164,7 +156,7 @@ const ListingDetails = ({ItemId, CategoryId}) => {
                                 <li>
                                   <span>
                                     <i className="ti-tablet" />
-                                    <a href="tel:+982653652-05">
+                                  <a href="tel:{Item[0].V_PhoneNumber}">
                                       {Item[0].V_PhoneNumber}
                                     </a>
                                   </span>
@@ -176,33 +168,51 @@ const ListingDetails = ({ItemId, CategoryId}) => {
                     </div>
                     <div className="col-md-4">
                       <div className="button">
-                        <Link className="icon-btn" href="/listing-grid">
+                        <Link className="icon-btn list-whatsapp" href="/listing-grid">
                           <FontAwesomeIcon icon={faWhatsapp} />
                         </Link>
-                        <Link className="icon-btn" href="/listing-grid">
+                        <Link className="icon-btn list-share" href="/listing-grid">
                           <i className="ti-share" />
                         </Link>
                       </div>
                     </div>
                   </div>
                 </div>
-                {Item[0]?.V_ItemDigitalFile && 
-                  <div className="listing-thumbnail mb-30 wow fadeInUp">
-                    <img
-                      src={Item[0]?.V_ItemDigitalFile}
-                      alt="listing image"
-                    />
+                
+
+                
+
+                
+                {imageData[0]?.Heading?.length > 0 && (
+                  <div className="listing-gallery-box bg-slider mb-30 wow fadeInUp list-box">
+                    {/* <h4 className="title">{imageData[0].V_HeadingName || "Gallery"}</h4> */}
+                    <Slider
+                      {...GallerySlider2}
+                      className="gallery-slider-one"
+                      prevArrow={<div className="slick-prev custom-arrow"><FaChevronLeft /></div>}
+                      nextArrow={<div className="slick-next custom-arrow"><FaChevronRight /></div>}
+                    >
+                      {imageData[0].Heading.map((img, idx) => (
+                        <div className="gallery-item" key={idx}>
+                          <img className="listslide" src={img.V_HeadingDetails} alt="gallery image" />
+                        </div>
+                      ))}
+                    </Slider>
                   </div>
-                }
+                )}
+
+
+
+
                 {aboutData && (
-                  <div className="listing-content mb-30 wow fadeInUp">
-                    <h3 className="title">{aboutData.V_HeadingName || "About"}</h3>
+                  <div className="listing-content mb-30 wow fadeInUp list-box">
+                    <h3 className="title fz-24">{aboutData.V_HeadingName || "About"}</h3>
                     <p>{aboutData.Heading[0].V_HeadingDetails}</p>
                   </div>
                 )}
                 {ItemHeading[0]?.V_KeyFeatures &&
-                  <div className="listing-content mb-30 wow fadeInUp">
-                    <h3 className="title">Product & Services</h3>
+                  <div className="listing-content mb-30 wow fadeInUp list-box">
+                    <h3 className="title fz-24">Product & Services</h3>
                     <div className="row">
                       {ItemHeading[0].V_KeyFeatures.split(',').map((feature, index) => (
                           <div className="col-lg-4 col-md-6 col-sm-12" key={index}>
@@ -211,7 +221,7 @@ const ListingDetails = ({ItemId, CategoryId}) => {
                                 <i className="ti-check-box" />
                               </div>
                               <div className="info">
-                                <h6>{feature.trim()}</h6>
+                              <h6 className="fz-14">{feature.trim()}</h6>
                               </div>
                             </div>
                           </div>
@@ -221,8 +231,8 @@ const ListingDetails = ({ItemId, CategoryId}) => {
                 }
                 
                 {videoData && (
-                  <div className="listing-play-box mb-30 wow fadeInUp">
-                    <h4 className="title">{videoData.V_HeadingName || "Documentary"}</h4>
+                  <div className="listing-play-box mb-30 wow fadeInUp list-box ">
+                    <h4 className="title fz-24">{videoData.V_HeadingName || "Documentary"}</h4>
                     <div
                       className="play-content bg_cover text-center"
                       style={{
@@ -242,7 +252,7 @@ const ListingDetails = ({ItemId, CategoryId}) => {
                     </div>
                   </div>
                 )}
-                {imageData[0]?.Heading?.length > 0 && (
+                {/* {imageData[0]?.Heading?.length > 0 && (
                   <div className="listing-gallery-box mb-30 wow fadeInUp">
                     <h4 className="title">{imageData[0].V_HeadingName || "Gallery"}</h4>
                     <Slider {...GallerySlider2} className="gallery-slider-one">
@@ -256,7 +266,10 @@ const ListingDetails = ({ItemId, CategoryId}) => {
                       ))}
                     </Slider>
                   </div>
-                )}
+                )} */}
+
+                
+
 
                 {/* <div className="listing-gallery-box mb-30 wow fadeInUp">
                   <h4 className="title">Photo Gallery</h4>
@@ -293,11 +306,16 @@ const ListingDetails = ({ItemId, CategoryId}) => {
                     </div>
                   </Slider>
                 </div> */}
+
+
+
+
+
                 {Category.length>0 && 
-                   <div  className="listing-tag-box mb-30 wow fadeInUp" >
-                    <h4 className="title">Popular Categories</h4>
+                  <div className="listing-tag-box mb-30 pb-20 wow fadeInUp list-box " >
+                    <h4 className="title fz-24">Find From Other Categories</h4>
                     {Category.map((cat, index) => (
-                      <a key={index} href="#">{cat.V_CategoryName}</a>
+                      <a key={index} className="" href="#">{cat.V_CategoryName}</a>
                     ))}
                   </div>
                 }
