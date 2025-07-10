@@ -1,5 +1,6 @@
 import Link from "next/link";
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
+
 
 // export const Home = () => (
 //   <Fragment>
@@ -40,47 +41,50 @@ export const Home = () => (
 //   </Fragment>
 // );
 
-export const Categories = () => (
-  <Fragment>
-    <li className="menu-item mega-menu">
-      {/* <Link href="/category">Category</Link> */}
-      <div className="mega-menu-content">
-        <div className="mega-menu-column">
-          <h5>Events</h5>
-          <ul>
-            <li><Link href="/events/music">Music Events</Link></li>
-            <li><Link href="/events/sports">Sports Events</Link></li>
-            <li><Link href="/events/festivals">Festivals</Link></li>
-          </ul>
+
+
+export const Categories = ({ categories = [] }) => {
+   return (
+    <Fragment>
+      
+      <li
+        className="menu-item"
+        // onMouseEnter
+        // onClick={handleOpenMenu} // Fetch on every hover
+      >
+        <div className="mega-menu-content">
+          { categories.length > 0 ? (
+            categories.map((cat) => (
+              <div key={cat.N_T_M_Category_ID} className="mega-menu-column">
+                <Link href={`/category/${cat.N_T_M_Category_ID}`}>
+                       <h5>{cat.V_CategoryName}</h5>
+                </Link>
+                {cat.SubCategory && cat.SubCategory.length > 0 ? (
+                  <ul>
+                    {
+                      cat.SubCategory.map((subCat) => (
+                        <li key={subCat.N_T_M_Category_ID}>
+                          <Link href={`/category/${subCat.N_T_M_Category_ID}`}>
+                            {subCat.V_CategoryName}
+                          </Link>
+                        </li>
+                      ))
+                    }
+                  </ul>
+                ) 
+                : null}
+              </div>
+            ))
+          ) 
+        : (
+        <li>No categories found.</li>
+      )}
         </div>
-        <div className="mega-menu-column">
-          <h5>Workshops</h5>
-          <ul>
-            <li><Link href="/workshops/tech">Tech</Link></li>
-            <li><Link href="/workshops/art">Art</Link></li>
-            <li><Link href="/workshops/culinary">Culinary</Link></li>
-          </ul>
-        </div>
-        <div className="mega-menu-column">
-          <h5>Exhibitions</h5>
-          <ul>
-            <li><Link href="/exhibitions/art">Art Shows</Link></li>
-            <li><Link href="/exhibitions/book">Book Fairs</Link></li>
-            <li><Link href="/exhibitions/auto">Auto Expo</Link></li>
-          </ul>
-        </div>
-        <div className="mega-menu-column">
-          <h5>Online</h5>
-          <ul>
-            <li><Link href="/online/webinars">Webinars</Link></li>
-            <li><Link href="/online/conferences">Conferences</Link></li>
-            <li><Link href="/online/courses">Courses</Link></li>
-          </ul>
-        </div>
-      </div>
-    </li>
-  </Fragment>
-);
+      </li>
+    </Fragment>
+   )
+};
+
 
 export const Blog = () => (
   <Fragment>

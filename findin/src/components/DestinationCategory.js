@@ -4,6 +4,8 @@ import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight, faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
+import config from "./common.service";
+import homeApi from "./Home";
 
 const SampleNextArrow = (props) => {
   const { className, style, onClick } = props;
@@ -53,16 +55,9 @@ const DestinationCategory = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch(
-          "http://13.203.104.113:3000/api/user/get/city_details/findintrivandrum"
-        );
-        const data = await response.json();
-
-        if (data.success_status && data.info.length > 0) {
-          setCategories(data.info[0].Category || []);
-        } else {
-          console.error("Invalid API response format");
-        }
+         const data = await homeApi.Events(); // calling the imported API
+          const eventData = data.Category?.length ? data.Category : [];
+          setCategories(eventData);
       } catch (error) {
         console.error("Error fetching categories:", error);
       }
@@ -86,6 +81,7 @@ const DestinationCategory = () => {
               return (
                 <div key={category.N_T_M_Category_ID} className="category-item category-item-two">
                   <div className="category-img">
+
                     <Image
                       src={imageUrl}
                       alt={category.V_CategoryName}
@@ -94,20 +90,18 @@ const DestinationCategory = () => {
                       style={{ objectFit: "cover", borderRadius: "10px" }}
                       unoptimized // Required for external URLs
                     />
-                    <div className="category-overlay">
-                      <div className="category-content">
-                        <Link href="">
-                          {/* <i className="ti-link" /> */}
-                        </Link>
+                    <Link href={`/item-listing?category=${category.N_T_M_Category_ID || ''}&location=${''}&keyword=${''}`}  className="category-overlay">
+                        <div className="category-content">
                       </div>
-                    </div>
+                    </Link>
+                    
                   </div>
                   <div className="info">
                     {/* <div className="icon">
                       <Image src={iconUrl} alt="icon" width={30} height={30} unoptimized />
                     </div> */}
                     <h3 className="title mt-10">
-                      <a href="#">{category.V_CategoryName}</a>
+                      <a href={`/item-listing?category=${category.N_T_M_Category_ID || ''}&location=${''}&keyword=${''}`}>{category.V_CategoryName}</a>
                     </h3>
                     <span className="listing">{category.Listing} Listings</span>
                   </div>

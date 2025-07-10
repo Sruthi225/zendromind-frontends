@@ -6,6 +6,7 @@ import { faArrowRight, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import axios from 'axios';
 import config from "./common.service";
+import homeApi from "./Home";
 // import { faPhone } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -83,16 +84,9 @@ const LatestDestination = () => {
     // if (!formData.N_T_M_Category_ID) return; // Prevent API call if no category is selected
 
     try {
-      const response = await axios.get(
-        `${config.bmrServerURL}/api/user/get/city_details/FindInTrivandrum`
-      );
-      let data =
-        response.data.info && response.data.info.length > 0 && response.data.info[0].Items
-          ? response.data.info[0].Items
-          : [];
-
-      data = [...data].sort(() => Math.random() - 0.5);
-      setItem(data);
+      const data = await homeApi.Events(); // calling the imported API
+      const eventData = data.Items?.length ? data.Items : [];
+      setItem(eventData);
     } catch (error) {
       console.error("Error fetching locations:", error);
     }
@@ -114,26 +108,16 @@ const LatestDestination = () => {
             ? Item.map((item, index) => (
               <div key={item.index} className="listing-item listing-grid-item-two">
                 <div className="listing-thumbnail">
-                  <img className="h-250" src={item.V_ItemDigitalFile} alt="Listing Image" />
+                  <Link href={`/listing-details-2?itemid=${item.N_T_M_Items_ID}&categoryid=${item.N_T_M_Category_ID}`} className="h-250" alt="Listing Image">
+                    <img className="h-250" src={item.V_ItemDigitalFile} alt="Listing Image" />
+                  </Link>
                   <div className="cat-name">{item.V_CategoryName}</div>
-                  {item.B_Featured && <span className="featured-btn">Featured</span>}
-                  {/* <ul className="ratings">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <li className="star" key={index}>
-                      <i className="flaticon-star-1"></i>
-                    </li>
-                  ))}
-                  <li>
-                    <span>
-                      <a href="#">({item.reviews} Reviews)</a>
-                    </span>
-                  </li>
-                </ul> */}
+                  {item.B_Featured === 1 && <span className="featured-btn">Featured</span>}
                 </div>
                 <div className="listing-content">
                   <div className="li-padding">
                     <h3 className="title">
-                      <Link href="/listing-details-1">{item.V_ItemName}</Link>
+                      <Link href={`/listing-details-2?itemid=${item.N_T_M_Items_ID}&categoryid=${item.N_T_M_Category_ID}`}>{item.V_ItemName}</Link>
                     </h3>
                     <p>
                       <i className="ti-location-pin"></i> {item.V_LocationName}
@@ -150,7 +134,7 @@ const LatestDestination = () => {
 
                     {/* Contact & Links */}
                     <div className="listing-meta list-meta2 d-flex justify-content-between align-items-center">
-                      <a href={item.viewMoreLink}>
+                      <a href={`/listing-details-2?itemid=${item.N_T_M_Items_ID}&categoryid=${item.N_T_M_Category_ID}`}>
                         <div className="view-more">View More</div>
                       </a>
                       <div className="icons d-flex align-items-center">

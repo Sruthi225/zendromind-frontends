@@ -15,7 +15,8 @@ const SearchForm = () => {
   const [categories, setCategories] = useState([]);
   const [locations, setLocations] = useState([]);
   const [loading, setLoading] = useState({ categories: true, locations: true });
-   const [selectionSource, setSelectionSource] = useState(""); 
+  const [selectionSource, setSelectionSource] = useState(""); 
+  const [error, setError] = useState(""); 
 
   useEffect(() => {
     fetchCategories();
@@ -127,18 +128,18 @@ const fetchLocations = async (categoryId = 0) => {
           
             <Select
               className="form_control w-114 p-0 t-start h-70"
-            name="category"
-            options={categoryOptions}
-            value={categoryOptions.find(opt => opt.value === formData.category)}
-            onChange={(selectedOption) => {
-              const selectedCategoryId = selectedOption?.value || "";
-              setFormData(prev => ({ ...prev, category: selectedCategoryId }));
-              if (!formData.location && selectedCategoryId) {
-                setSelectionSource("category");
-                // fetchLocations(selectedCategoryId);
-              }
-            }}
-            placeholder="Select Category"
+              name="category"
+              options={categoryOptions}
+              value={categoryOptions.find(opt => opt.value === formData.category)}
+              onChange={(selectedOption) => {
+                const selectedCategoryId = selectedOption?.value || "";
+                setFormData(prev => ({ ...prev, category: selectedCategoryId }));
+                if (!formData.location && selectedCategoryId) {
+                  setSelectionSource("category");
+                  // fetchLocations(selectedCategoryId);
+                }
+              }}
+              placeholder="Select Category"
             />
 
           </div>
@@ -188,9 +189,22 @@ const fetchLocations = async (categoryId = 0) => {
           {/* <button type="submit" className="main-btn icon-btn">
             Search Now
           </button> */}
-          <a href={`/item-listing?category=${formData.category}&location=${formData.location}&keyword=${formData.keyword}`} className="main-btn icon-btn">
-            Search Now
-          </a>
+          
+            {/* {(formData.category || formData.location || formData.keyword) ? (
+               */}
+              <a
+                href={`/item-listing?category=${formData.category || ''}&location=${formData.location || ''}&keyword=${formData.keyword || ''}`}
+                className="main-btn icon-btn"
+              >
+                Search Now
+              </a>
+            {/* ) : (
+              <a className="main-btn icon-btn disabled" onClick={(e) => e.preventDefault()}>
+                Search Now
+              </a>
+            )} */}
+
+          
        </div>
       </div>
     </form>

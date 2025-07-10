@@ -1,8 +1,21 @@
 import Link from "next/link";
-import React from "react";
+import React,{useState}  from "react";
+import homeApi from "../../components/menu";
 import { Categories, Blog, Contact, Home, Listing, Pages } from "../Menu";
 
 const Header1 = () => {
+  const [categoryData, setCategoryData] = useState([]);
+  const [activeMenu, setActiveMenu] = useState("");
+
+  const handleCategoryClick = async () => {
+    setActiveMenu("categories");
+    try {
+      const data = await homeApi.Events();
+      setCategoryData(data); // assuming array of categories
+    } catch (err) {
+      console.error("Error fetching categories:", err);
+    }
+  };
   return (
     <header className="header-area header-area-one d-none d-xl-block">
       <div className="header-top">
@@ -76,9 +89,9 @@ const Header1 = () => {
                         {/* </ul>
                       </li> */}
                       <li className="menu-item has-children">
-                        <a href="#">categories</a>
+                         <a href="#" onClick={handleCategoryClick}>Categories</a>
                         <ul className="sub-menu">
-                          <Categories />
+                          <Categories categories={categoryData} />
                         </ul>
                       </li>
 

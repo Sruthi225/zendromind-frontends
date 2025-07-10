@@ -6,8 +6,7 @@ import SearchForm from '@/src/components/SearchForm';
 import DestinationCategory from '@/src/components/DestinationCategory';
 import LatestDestination from '@/src/components/LatestDestination';
 import TestimoinalSlider2 from "@/src/components/Slider/TestimonialSlider2";
-
-import ImageGrid from '@/src/components/ImageGrid';
+import Event from '@/src/components/Event';
 import {
   ClientSliderOne,
   ListingSliderOne,
@@ -42,10 +41,8 @@ const Index = () => {
                     className="hero-search-wrapper wow fadeInUp"
                     data-wow-delay="70ms"
                   >
-                     <SearchForm />
-                    
-                                     </div>
-                  
+                    <SearchForm />
+                  </div>
                 </div>
               </div>
             </div>
@@ -69,12 +66,9 @@ const Index = () => {
               </div>
             </div>
           </div>
-
-
           <div style={{ width: "100%", maxWidth: "1200px", margin: "auto" }}>
             <LatestDestination />
           </div>
-
         </div>
       </section>
       {/*====== End Latest Desstination Section ======*/}
@@ -93,32 +87,13 @@ const Index = () => {
               </div>
             </div>
           </div>
-          
-            
           <div style={{ width: "100%", maxWidth: "1200px", margin: "auto" }}>
-  <DestinationCategory />
-</div>
- 
+            <DestinationCategory />
+          </div>
         </div>
       </section>
       {/*====== End category Section ======*/}
      
-
-
-
-
-
-     
-
-
-
-
-
-
-
-     
-
-
 
 
 {/*====== Start offer Section ======*/}
@@ -132,34 +107,19 @@ const Index = () => {
               <div className="col-lg-12 pb-20">
                 {/* <div className="company-name wow fadeInLeft">Bangalore</div> */}
                 <div className="cta-content-box fadeInRight">
-                  <h2>Find Upcoming Events in Bangalore</h2>
-                  <p>
+                  <h2>Find Upcoming Events in Trivandrum</h2>
+                  {/* <p>
                     Pharetra venenatis ante pulvinar fermentum dignissim one
                     malesuada laoreet ridiculus fringilla quam
-                  </p>
-                  
+                  </p>  */}
                 </div>
-
               </div>
-                
-
-              <ImageGrid/>
-
-
-              
-
-
-
-              
-              
+              <Event/>
             </div>
           </div>
         </div>
       </section>
       {/*====== End offer Section ======*/}
-
-
-
 
 
 

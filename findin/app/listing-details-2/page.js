@@ -1,12 +1,4 @@
 "use client";
-import ListingDetailsRight from "@/src/components/ListingDetailsRight";
-import VideoPopup from "@/src/components/VideoPopup";
-import Layout from "@/src/layouts/Layout";
-import { GallerySlider2, reletedListingSlider2 } from "@/src/sliderProps";
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import Slider from "react-slick";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ItemDetails from "@/src/components/ItemDetails";
 import { useSearchParams } from 'next/navigation';
 
