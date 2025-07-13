@@ -1,21 +1,23 @@
 import Link from "next/link";
 import React,{useState}  from "react";
-import homeApi from "../../components/menu";
+import homeApi from "../../components/Home";
 import { Categories, Blog, Contact, Home, Listing, Pages } from "../Menu";
 
 const Header1 = () => {
   const [categoryData, setCategoryData] = useState([]);
-  const [activeMenu, setActiveMenu] = useState("");
 
   const handleCategoryClick = async () => {
-    setActiveMenu("categories");
+    // if (categoryData.length > 0) return; // Don't refetch
+
     try {
       const data = await homeApi.Events();
-      setCategoryData(data); // assuming array of categories
+      const eventData = data?.Category?.length ? data.Category : [];
+      setCategoryData(eventData);
     } catch (err) {
       console.error("Error fetching categories:", err);
     }
   };
+
   return (
     <header className="header-area header-area-one d-none d-xl-block">
       <div className="header-top">
@@ -80,7 +82,7 @@ const Header1 = () => {
                   <div className="navbar-close">
                     <i className="ti-close"></i>
                   </div>
-                  <nav className="main-menu">
+                  <nav className="main-menu" >
                     <ul>
                       {/* <li className="menu-item has-children">
                         <Link href="/">Home</Link>
@@ -89,7 +91,7 @@ const Header1 = () => {
                         {/* </ul>
                       </li> */}
                       <li className="menu-item has-children">
-                         <a href="#" onClick={handleCategoryClick}>Categories</a>
+                         <a href="#" onMouseOver={handleCategoryClick}>Categories</a>
                         <ul className="sub-menu">
                           <Categories categories={categoryData} />
                         </ul>

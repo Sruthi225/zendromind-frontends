@@ -1,20 +1,8 @@
 import Link from "next/link";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment } from "react";
 
 
-// export const Home = () => (
-//   <Fragment>
-//     <li className="menu-item">
-//       <Link href="/">Home One</Link>
-//     </li>
-//     <li className="menu-item">
-//       <Link href="/index-2">Home Two</Link>
-//     </li>
-//     <li className="menu-item">
-//       <Link href="/index-3">Home Three</Link>
-//     </li>
-//   </Fragment>
-// );
+
 
 export const Home = () => (
   <Fragment>
@@ -49,17 +37,15 @@ export const Categories = ({ categories = [] }) => {
       
       <li
         className="menu-item"
-        // onMouseEnter
-        // onClick={handleOpenMenu} // Fetch on every hover
       >
         <div className="mega-menu-content">
           { categories.length > 0 ? (
             categories.map((cat) => (
               <div key={cat.N_T_M_Category_ID} className="mega-menu-column">
-                <Link href={`/category/${cat.N_T_M_Category_ID}`}>
+                <a href={`/item-listing?category=${cat.N_T_M_Category_ID || ''}&location=${''}&keyword=${''}`}>
                        <h5>{cat.V_CategoryName}</h5>
-                </Link>
-                {cat.SubCategory && cat.SubCategory.length > 0 ? (
+                </a>
+                {/* {cat.SubCategory && cat.SubCategory.length > 0 ? (
                   <ul>
                     {
                       cat.SubCategory.map((subCat) => (
@@ -72,7 +58,7 @@ export const Categories = ({ categories = [] }) => {
                     }
                   </ul>
                 ) 
-                : null}
+                : null} */}
               </div>
             ))
           ) 

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import Slider from "react-slick";
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
-import { useSearchParams } from 'next/navigation';
 import axios from 'axios';
 import config from "./common.service";
 
@@ -13,12 +11,28 @@ const ItemListing = ({category, location, keyword}) => {
 
   const [loading, setLoading] = useState(true);
   const [Item, setItem] = useState([]);
+  const [subcategories, setSubcategories] = useState([]); 
+  const [selectedSubcat, setSelectedSubcat] = useState([]);
 
-  const fetchItem = async () => {
+  const toggleCategory = (id) => {
+  setSelectedSubcat((prev) => {
+    const updated =
+      prev.includes(id) ? prev.filter((N_T_M_Category_ID) => N_T_M_Category_ID !== id) : [...prev, id];
+
+    // Call fetchItem with the updated subcategory list
+    fetchItem(updated);
+    return updated;
+  });
+};
+
+
+
+  const fetchItem = async (subcatArray = selectedSubcat) => {
 
     try {
+      const subcat = subcatArray.length > 0 ? `&subcat=${subcatArray.join(',')}` : '';
       const response = await axios.get(
-        `${config.bmrServerURL}/api/user/get/category_item_list/${category}/${location}/${keyword}`
+        `${config.bmrServerURL}/api/user/get/category_item_list/${category}/${location}/${keyword}?${subcat}`
       );
       let data =
         response.data.info && response.data.info.length > 0
@@ -35,37 +49,82 @@ const ItemListing = ({category, location, keyword}) => {
     }
   };
 
+   const fetchSubCategory = async () => {
+
+    try {
+      const response = await axios.get(
+        `${config.bmrServerURL}/api/user/get_sub_category/${category}`
+      );
+      let data =
+        response.data.info && response.data.info.length > 0
+          ? response.data.info
+          : [];
+        setSubcategories(data);
+    } catch (error) {
+      console.error("Error fetching locations:", error);
+    }
+    finally {
+      setLoading(false); // Stop loading after fetch
+    }
+  };
+  
+
   useEffect(() => {
     fetchItem();
+    fetchSubCategory();
   }, []);
   if (loading) return <p>Loading Items...</p>;
 
 return (
   <section className="listing-grid-area py-5">
     <div className="container">
-      {/* Desktop Grid View */}
-      {/* Desktop Grid View */}
-      <div className="row d-none d-md-flex">
-        {Item.slice(0, 12).map((item, index) => (
-          <div key={index} className="col-lg-4 col-md-6 mb-4">
-            <Card item={item} />
-          </div>
-        ))}
-      </div>
-
-
-      {/* Mobile Slider View
-      {/* Mobile Slider View */}
-      {/* <div className="d-block d-md-none position-relative slider-wrapper ">
-        <Slider {...sliderSettings}>
-          {Item.slice(0, 12).map((item, index) => (
-            <div key={index} className="px-2 pp-0">
-              <Card item={item} />
+      <div className="row">
+        <div className="col-md-3">
+          <div className="row">
+            <div className = "col-md-6 ">
+              <h5 className="mb-3">Subcategories</h5>
             </div>
-          ))}
-        </Slider>
-      </div>  */}
-
+            <div className = "col-md-6 ">
+              <button
+                className="btn btn-sm"
+                onClick={() => {
+                  setSelectedSubcat([]);
+                  fetchItem([]); // call API with no subcategories
+                }}
+              >
+                Clear Filter
+              </button>
+            </div>
+          </div>
+          
+          <ul className="list-unstyled">
+            {subcategories.map((cat, idx) => (
+              <li key={idx} className="form-check mb-2">
+                <input
+                  type="checkbox"
+                  className="form-check-input"
+                  id={`cat-${idx}`}
+                  checked={selectedSubcat.includes(cat.N_T_M_Category_ID)}
+                  onChange={() => toggleCategory(cat.N_T_M_Category_ID)}
+                />
+                <label className="form-check-label" htmlFor={`cat-${idx}`}>
+                  {cat.V_CategoryName} 
+                  {/* <span className="text-muted">({cat.count})</span> */}
+                </label>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div className="col-md-9">
+              <div className="row d-none d-md-flex">
+                {Item.slice(0, 12).map((item, index) => (
+                  <div key={index} className="col-lg-4 col-md-6 mb-4">
+                    <Card item={item} />
+                  </div>
+                ))}
+              </div>
+        </div>
+    </div>
     </div>
   </section>
 );
